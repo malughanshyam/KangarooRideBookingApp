@@ -1,0 +1,53 @@
+.fullscreen_bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-image: url('../../img/color-splash.jpg');
+    background-repeat:repeat;
+}
+
+.page-header{
+  color: #fff;
+}
+
+label {
+    color: #fff;
+    font-family: "Segoe UI Light","Helvetica Neue","Segoe UI","Segoe WP",sans-serif;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+#subHeading {
+ color: #F8F8F8;
+}
+
+
+nav {
+    font-family: "Segoe UI Light","Helvetica Neue","Segoe UI","Segoe WP",sans-serif;
+    font-weight: 100;
+    line-height: 1.1;
+}
+
+form {
+    padding-top: 0.5em;
+}
+pre {
+    white-space: pre-wrap;
+    /* css-3 */
+    
+    white-space: -moz-pre-wrap !important;
+    /* Mozilla, since 1999 */
+    
+    white-space: -pre-wrap;
+    /* Opera 4-6 */
+    
+    white-space: -o-pre-wrap;
+    /* Opera 7 */
+    
+    word-wrap: break-word;
+    /* Internet Explorer 5.5+ */
+}
