@@ -1,0 +1,26 @@
+#homeLink {
+    font-size: 200%;
+    font-family: "Arial Black", Gadget, sans-serif
+}
+nav {
+  font-family: "Segoe UI Light","Helvetica Neue","Segoe UI","Segoe WP",sans-serif;
+  font-weight: 100;
+  line-height: 1.1;
+}
+.fullscreen_bg {
+    position: fixed;
+    top: 3em;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-image: url('../../img/color-splash.jpg');
+    background-repeat:repeat;
+}
+.page-header, .container{
+  color: #fff;
+}
+#subHeading {
+ color: #F8F8F8;
+}
