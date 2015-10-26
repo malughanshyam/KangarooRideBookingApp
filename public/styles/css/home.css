@@ -10,9 +10,15 @@
     background-repeat:repeat;
 }
 
-.page-header{
+.page-header, table > tbody{
   color: #fff;
 }
+
+table > thead a {
+  color: #00FFFF;
+}
+
+
 
 label {
     color: #fff;
