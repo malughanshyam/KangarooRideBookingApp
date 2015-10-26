@@ -38,7 +38,7 @@ process.on('uncaughtException', function(err) {
 });
 
 
-//var mongoose = require('mongoose'); // mongoose for mongodb
+var mongoose = require('mongoose'); // mongoose for mongodb
 var flash = require('connect-flash');
 
 var port = process.env.PORT || 8080; // set the port
@@ -48,14 +48,14 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 var cookieParser = require('cookie-parser');
-//var database = require('./app/config/database'); // load the database config
+var database = require('./app/config/database'); // load the database config
 var cors = require("cors");
 var favicon = require('serve-favicon');
 var path = require('path');
 
 
 // configuration ===============================================================
-//mongoose.connect(database.url); // connect to mongoDB database on modulus.io
+mongoose.connect(database.url); // connect to mongoDB database on modulus.io
 
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
 app.use(cors());
