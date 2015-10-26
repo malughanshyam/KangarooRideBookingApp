@@ -5,7 +5,6 @@ angular.module('kangarooRideApp')
 // ---------------------------------
 .controller('kangarooRideCtrl', function($scope, $compile, $http) {
 
-
 	$scope.newBooking = {};
 	$scope.newBooking.email;
 
@@ -13,7 +12,7 @@ angular.module('kangarooRideApp')
 	$scope.newBooking.lastName;
 	$scope.newBooking.phoneNumber;
 	$scope.newBooking.rideTypeSelected;
-	$scope.newBooking.rideDate;
+	$scope.newBooking.rideDateSelected;
 	$scope.newBooking.rideTimeSelected;
 	$scope.newBooking.specialNeeds;
 

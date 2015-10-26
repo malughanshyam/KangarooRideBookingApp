@@ -7,6 +7,19 @@ var HOME_PAGE = 'views/home.html';
 // Include the MongoDB Schema 
 module.exports = function(app) {
 
+    // Import AdHocJob Controllers / Route Handlers
+    var ReservationHandler = require('./controllers/ReservationHandler');
+
+    // Get All Reservations
+    app.get('/reservations', ReservationHandler.getAllReservations);
+    
+    // Get a specific Reservation
+    app.get('/reservations/:ConfirmationCode', ReservationHandler.getAllReservationByConfirmationCode);
+
+    // Book new Reservation Job
+    app.post('/bookNewReservation', ReservationHandler.bookNewReservation);
+
+
     // Default Route
     app.get('/', function (req, res) {
         res.sendFile(HOME_PAGE, { root: __dirname + '/../public/'}); 
