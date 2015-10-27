@@ -47,17 +47,8 @@ kangarooRideApp.controller('kangarooRideCtrl', function($scope, $compile, $http)
 	$scope.bookingReset = function(){
 		$scope.newBooking = {};
 	}	
-/*
-    while (h<17){
-    	$scope.newBooking.rideTimesAvailable.push({'id':id, 'slot': (h % 12) + ':' + m + ampm});
-    	id= id+1;
-    	h = h + 1;
-    	if (h > 12) {
-    		ampm = 'pm';
-    	}
-    }
-*/
 
+       
 });
 
 
@@ -79,3 +70,4 @@ kangarooRideApp.directive('jqdatepicker', function() {
         }
     }
 });
+

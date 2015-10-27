@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="/scripts/vendor/jquery.timepicker.min.js"></script>
+    <script src="/scripts/vendor/jquery.mask.min.js"></script>
+   
+    
 
 
 
@@ -27,6 +30,7 @@
 
     <link rel="stylesheet" href="/styles/css/metro-bootstrap.min.css">
     <link rel="stylesheet" href="/styles/css/jquery.timepicker.css">
+
 
     <!-- Bootstrap core CSS -->
     <!-- Bootstrap theme -->
@@ -80,7 +84,7 @@
                 <div class="col-sm-10 col-lg-6 ">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="glyphicon glyphicon-user"></i></div>
-                        <input type="text" class="form-control" id="fname" placeholder="First Name" ng-model="newBooking.firstName" required>
+                        <input type="text" class="form-control" id="fname" placeholder="First Name" ng-model="newBooking.firstName" required title="Enter a valid First Name">
                     </div>
                 </div>
             </div>
@@ -90,7 +94,7 @@
                 <div class="col-sm-10 col-lg-6 ">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="glyphicon glyphicon-user"></i></div>
-                        <input type="text" class="form-control" id="lname" placeholder="Last Name" ng-model="newBooking.lastName" required>
+                        <input type="text" class="form-control" id="lname" placeholder="Last Name" ng-model="newBooking.lastName" required title="Enter a valid Last Name">
                     </div>
                 </div>
             </div>
@@ -100,7 +104,7 @@
                 <div class="col-sm-10 col-lg-6 ">
                     <div class="input-group">
                         <div class="input-group-addon">@</div>
-                        <input type="email" class="form-control" id="emailInputId" placeholder="john@domain.com" ng-model="newBooking.email" required>
+                        <input type="email" class="form-control" id="emailInputId" placeholder="john@domain.com" ng-model="newBooking.email" required title="Enter a valid Email">
                     </div>
                 </div>
             </div>
@@ -110,7 +114,7 @@
                 <div class="col-sm-10 col-lg-6">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></div>
-                        <input type="text" class="form-control" placeholder="(555) 555-5555" ng-model="newBooking.phoneNumber" required>
+                        <input type="text" class="form-control phone_us" id="phoneNumber" placeholder="(555) 555-5555" ng-model="newBooking.phoneNumber" pattern=".{14,}"   required title="(___) ___-____">
                     </div>
                 </div>
             </div>
@@ -122,7 +126,7 @@
                 <div class="col-sm-10 col-lg-6 ">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-pied-piper-alt"></i></div>
-                        <select name="repeatSelect" id="rideType" ng-model="newBooking.rideTypeSelected" required>
+                        <select name="repeatSelect" id="rideType" ng-model="newBooking.rideTypeSelected" required title="Select a type of Ride">
                             <option value="">---Please select---</option>
                             <!-- not selected / blank option -->
                             <option ng-repeat="option in rideTypeAvailable" value="{{option.id}}">{{option.name}}</option>
@@ -136,7 +140,7 @@
                 <div class="col-sm-10 col-lg-6 ">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
-                        <input type="text" class="form-control" id="rideDate" placeholder="Ride Date" ng-model="newBooking.rideDateSelected" jqdatepicker required>
+                        <input type="text" class="form-control" id="rideDate" placeholder="Ride Date" ng-model="newBooking.rideDateSelected" jqdatepicker required title="Select a date for Ride">
                     </div>
                 </div>
             </div>
@@ -160,7 +164,7 @@
                 <div class="col-sm-10 col-lg-6 ">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="glyphicon glyphicon-time"></i></div>
-                        <input type="text" class="form-control" id="rideTimePicker" placeholder="Ride Date" ng-model="newBooking.rideTimeSelected" required>
+                        <input type="text" class="form-control" id="rideTimePicker" placeholder="Ride Date" ng-model="newBooking.rideTimeSelected" required title="Select a time for Ride">
                         </select>
                     </div>
                 </div>
@@ -196,10 +200,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
 
-    <script src="/scripts/vendor/bootstrap-formhelpers.js"></script>
 
     <script src="/scripts/vendor/smart-table.min.js"></script>
     <script src="/scripts/vendor/bootbox.min.js"></script>
+
 
 
     <script src="/scripts/app.js"></script>
@@ -216,6 +220,10 @@
                 ['3pm', '4pm']
             ]
         });
+
+
+  $('.phone_us').mask('(000) 000-0000');
+
     </script>
 </body>
 
