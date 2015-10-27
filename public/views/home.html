@@ -11,11 +11,22 @@
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+    <script src="/scripts/vendor/jquery.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="/scripts/vendor/jquery.timepicker.min.js"></script>
+
+
+
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.js"></script>
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-animate.min.js"></script>
 
     <link rel="stylesheet" href="/styles/css/metro-bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/css/jquery.timepicker.css">
 
     <!-- Bootstrap core CSS -->
     <!-- Bootstrap theme -->
@@ -62,7 +73,7 @@
             </div>
         </div>
 
-        <form class="form-horizontal col-md-offset-2 col-lg-offset-2 col-xs-offset-1 col-xs-10" ng-submit="scheduleJob()">
+        <form class="form-horizontal col-md-offset-2 col-lg-offset-2 col-xs-offset-1 col-xs-10" ng-submit="bookReservation()">
 
             <div class="form-group">
                 <label for="fname" class="col-sm-2 control-label hidden-xs">First Name</label>
@@ -121,24 +132,35 @@
             </div>
 
             <div class="form-group">
-                <label for="rideDate" class="col-sm-2 control-label hidden-xs">Ride Day</label>
+                <label for="rideDate" class="col-sm-2 control-label hidden-xs">Ride Date</label>
                 <div class="col-sm-10 col-lg-6 ">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
-                        <input type="date" class="form-control" id="rideDate" placeholder="Ride Date" ng-model="newBooking.rideDateSelected" required>
+                        <input type="text" class="form-control" id="rideDate" placeholder="Ride Date" ng-model="newBooking.rideDateSelected" jqdatepicker required>
                     </div>
                 </div>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="rideTimePicker" class="col-sm-2 control-label hidden-xs">Ride Time</label>
                 <div class="col-sm-10 col-lg-6 ">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="glyphicon glyphicon-time"></i></div>
                         <select name="repeatSelect" id="rideType" ng-model="newBooking.rideTimeSelected" required>
                             <option value="">---Please select---</option>
-                            <!-- not selected / blank option -->
+                            
                             <option ng-repeat="slot in rideTimesAvailable" value="{{slot}}">{{slot}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="form-group">
+                <label for="rideTimePicker" class="col-sm-2 control-label hidden-xs">Ride Time</label>
+                <div class="col-sm-10 col-lg-6 ">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="glyphicon glyphicon-time"></i></div>
+                        <input type="text" class="form-control" id="rideTimePicker" placeholder="Ride Date" ng-model="newBooking.rideTimeSelected" required>
                         </select>
                     </div>
                 </div>
@@ -154,21 +176,18 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10 ">
                     <button type="submit" class="btn btn-primary">Book Ride</button>
-                    <button type="button" class="btn btn-default" ng-click="schedReset()">Reset</button>
+                    <button type="button" class="btn btn-default" ng-click="bookingReset()">Reset</button>
                 </div>
             </div>
 
         </form>
 
-        <!--         <pre> {{newBooking}} </pre> -->
+        <pre> {{newBooking}} </pre>
 
     </div>
     <!-- /container -->
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
-    <script src="/scripts/vendor/jquery.min.js"></script>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/scripts/vendor/bootstrap.min.js"></script>
@@ -186,7 +205,18 @@
     <script src="/scripts/app.js"></script>
     <script src="/scripts/controllers/reservationCtrl.js"></script>
 
-
+    <script>
+        $('#rideTimePicker').timepicker({
+            'timeFormat': 'h:i A',
+            'minTime': '8:00am',
+            'maxTime': '4:30pm',
+            'step': 30,
+            'disableTimeRanges': [
+                ['9am', '1pm'],
+                ['3pm', '4pm']
+            ]
+        });
+    </script>
 </body>
 
 </html>

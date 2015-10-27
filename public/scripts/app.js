@@ -1,4 +1,4 @@
-var SSHDApp = angular.module('kangarooRideApp', ['ui.bootstrap', 'smart-table',
+var kangarooRideApp = angular.module('kangarooRideApp', ['ui.bootstrap', 'smart-table',
     'ngAnimate'
 ]);
 

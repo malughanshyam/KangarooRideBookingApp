@@ -1,0 +1,7 @@
+C:\mongodb\bin\mongod.exe --port 8097 --dbpath "C:\Users\gmalu\Documents\GitHub\KangarooRideBookingApp\data"
+
+
+C:\mongodb\bin\mongo --port 8097  KangarooRides
+
+
+"name": "MongoError"

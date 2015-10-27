@@ -1,10 +1,7 @@
-
-angular.module('kangarooRideApp')
-
 // ---------------------------------
 // Controller For Kangaroo Rides - Admin
 // ---------------------------------
-.controller('adminCtrl', function($scope, $compile, $http, kangarooAngularService, $rootScope) {
+kangarooRideApp.controller('adminCtrl', function($scope, $compile, $http, kangarooAngularService, $rootScope) {
 
 
     // Collection for Reservations Table

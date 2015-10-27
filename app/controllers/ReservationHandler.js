@@ -92,16 +92,18 @@ exports.getAllReservationByConfirmationCode = function(req, res) {
 
 // Book new Reservation
 exports.bookNewReservation = function(req, res) {
+    console.log(req.body);
+    log.debug("req %s", JSON.stringify(req.body));
 
     // Initialize the Reservation Variables
-    var email = req.body.Email;
-    var firstName = req.body.FirstName;
-    var lastName = req.body.LastName;
-    var phoneNumber = req.body.PhoneNumber;
-    var rideTypeSelected = req.body.RideTypeSelected;
-    var rideDateSelected = req.body.RideDateSelected;
-    var rideTimeSelected = req.body.RideTimeSelected;
-    var specialNeeds = req.body.SpecialNeeds;
+    var email = req.body.email;
+    var firstName = req.body.firstName;
+    var lastName = req.body.lastName;
+    var phoneNumber = req.body.phoneNumber;
+    var rideTypeSelected = req.body.rideTypeSelected;
+    var rideDateSelected = req.body.rideDateSelected;
+    var rideTimeSelected = req.body.rideTimeSelected;
+    var specialNeeds = req.body.specialNeeds;
     var clientIPaddress = req.ip || req.header('x-forwarded-for') || req.connection.remoteAddress;
 
     res.set('Access-Control-Allow-Origin', '*');
@@ -166,7 +168,7 @@ exports.bookNewReservation = function(req, res) {
             LastName: lastName,
             PhoneNumber: phoneNumber,
             RideTypeSelected: rideTypeSelected,
-            RideDateSelected: rideDateSelected,
+            RideDateSelected: Date(rideDateSelected),
             RideTimeSelected: rideTimeSelected,
             SpecialNeeds: specialNeeds,
             SubmittedByIP: clientIPaddress,
