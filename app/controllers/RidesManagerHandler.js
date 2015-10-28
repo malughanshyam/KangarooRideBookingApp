@@ -1,4 +1,4 @@
-// Handler functions for the Reservations Module
+// Handler functions for the Rides Manager Module
 // Load the Modules
 
 var path = require('path');
@@ -8,48 +8,31 @@ var mongoose = require('mongoose');
 var winston = require('winston');
 var log = winston.loggers.get('log');
 
-// Types of Log Levels
-// highLevelLogger.debug("Debug")
-// highLevelLogger.verbose("verbose")
-// highLevelLogger.info("info")
-// highLevelLogger.warn("warn")
-// highLevelLogger.error("error")
-
-// detailLogger.debug("Debug")
-// detailLogger.verbose("verbose")
-// detailLogger.info("info")
-// detailLogger.warn("warn")
-// detailLogger.error("error")
-
-
 // Include the MongoDB Schema 
-Reservations = require('../models/ReservationsSchema');
-RidesManager = require('../models/RideManagerSchema');
+RideManager = require('../models/RideManagerSchema');
 
 // Get all the Reservations
-exports.getAllReservations = function(req, res) {
+exports.getAllRides = function(req, res) {
 
     var clientIPaddress = req.ip || req.header('x-forwarded-for') || req.connection.remoteAddress;
 
-    var callback = function(err, reservations) {
+    var callback = function(err, data) {
         if (err) {
-            log.error('GET - Error retrieving all Reservations: %s', JSON.stringify({
+            log.error('GET - Error retrieving all Rides: %s', JSON.stringify({
                 clientIPaddress: clientIPaddress,
                 error: err
             }));
             res.status(500)
             return res.send(err)
         } else {
-            log.debug(' GET - Retrieved all Reservations');
-            res.send(reservations);
+            log.debug(' GET - Retrieved all Rides');
+            res.send(data.availableRides);
         }
 
     }
 
-    Reservations
-        .find()
-        .sort('-UpdatedTimeStamp')
-        .limit(100)
+    RideManager
+        .findOne()
         .exec(callback);
 }
 

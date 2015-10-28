@@ -6,8 +6,9 @@ kangarooRideApp.controller('adminCtrl', function($scope, $compile, $http, kangar
 
     // Collection for Reservations Table
     $scope.reservations = [];
-    $scope.displayedCollection = [];
-
+    $scope.displayedReservationsCollection = [];
+    $scope.displayedRidesCollection = [];
+    $scope.ridesPerSlot = 1;
     // Function to convert the ISO Datestring to Readable Format for displaying in the Recent Jobs Table
     $scope.parseIsoDatetime = function(dateStr) {
         return kangarooAngularService.parseIsoDatetime(dateStr);
@@ -20,7 +21,22 @@ kangarooRideApp.controller('adminCtrl', function($scope, $compile, $http, kangar
         $http.get(getReservations)
             .success(function(data) {
                 $scope.reservations = data;
-                $scope.displayedCollection = [].concat($scope.reservations);
+                $scope.displayedReservationsCollection = [].concat($scope.reservations);
+            })
+            .error(function(err) {
+                $scope.jobLog = 'Fetching Reservations Failed :' + err;
+            });
+    }
+
+
+    // Populate ReservationsTable
+    $scope.populateRidesTable = function() {
+        var getAllAvailableRides = '/allAvailableRides';
+
+        $http.get(getAllAvailableRides)
+            .success(function(data) {
+                $scope.allAvailableRides = data;
+                $scope.displayedRidesCollection = [].concat($scope.allAvailableRides);
             })
             .error(function(err) {
                 $scope.jobLog = 'Fetching Reservations Failed :' + err;
@@ -28,6 +44,9 @@ kangarooRideApp.controller('adminCtrl', function($scope, $compile, $http, kangar
     }
 
     $scope.populateReservationsTable();
+    $scope.populateRidesTable();
+
+    
 
 });
 

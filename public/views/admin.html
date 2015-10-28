@@ -73,7 +73,7 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="reservations">
 
-                    <table id="reservationsTable" st-table="displayedCollection" st-safe-src="reservations" class="table table-responsive ">
+                    <table id="reservationsTable" st-table="displayedReservationsCollection" st-safe-src="reservations" class="table table-responsive ">
                         <thead>
                             <tr>
                                 <!-- <th st-sort="JobID">JobID</th> -->
@@ -136,7 +136,7 @@
                         </thead>
 
                         <tbody>
-                            <tr ng-repeat="row in displayedCollection">
+                            <tr ng-repeat="row in displayedReservationsCollection">
                                 <td><small>{{row.ConfirmationCode}}<small></td>
 
                                     <td><small>{{row.Email}}<small></td>
@@ -220,33 +220,46 @@
                     </table>
 
                 </div>
-                
+
                 <div role="tabpanel" class="tab-pane" id="rides">
                     <br>
-                    <div class ="col-lg-offset-1 col-lg-4">
-                    <table id="ridesTable" st-table="displayedCollection" st-safe-src="AvailableRides" class="table table-responsive">
-                        <thead>
-                            <tr>
-                                <th st-sort="RideTypeSelected" align="center" class="text-center">
-                                    <a tooltip="Click to sort by RideTypeSelected">Available Ride Types</a>
-                                </th>
-                            </tr>
-                        </thead>
+                    
+                    <!-- Available Rides Table -->
+                    <div class="col-lg-offset-1 col-lg-4">
+                        <table id="ridesTable" st-table="displayedRidesCollection" st-safe-src="AvailableRides" class="table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th st-sort="RideTypeSelected" align="center" class="text-center">
+                                        <a tooltip="Click to sort by RideTypeSelected">Available Ride Types</a>
+                                    </th>
+                                </tr>
+                            </thead>
 
-                        <tbody>
-                            <tr ng-repeat="row in displayedCollection">
-                                    <td class="text-center"><small>{{row.RideTypeSelected}}<small></td>
+                            <tbody>
+                                <tr ng-repeat="row in displayedRidesCollection">
+                                    <td class="text-center"><small>{{row}}<small></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="2" class="text-center">
-                                    <div st-pagination="" st-items-by-page="15" st-displayed-pages="15"></div>
+                                <td colspan="1" class="text-center">
+                                    <div st-pagination="" st-items-by-page="15" st-displayed-pages="10"></div>
                                 </td>
                             </tr>
                         </tfoot>
-                    </table>
-                </div>
+                        </table>
+                    </div>
+
+                    <!-- Rides Allowed Per Slot -->
+                    <div class="col-lg-offset-1 col-sm-6 col-md-6">
+                        <!-- <a href="#adHocTab" data-toggle="tab" class="fa-links" id="adHocTile"> -->
+                            <div class="thumbnail tile tile-wide tile-green">
+                                <h3 class="tile-text"> Rides Allowed Per Slot</h3> <br><br>
+                                <h2> {{ridesPerSlot}} </h2>
+                                
+                            </div>
+                        <!-- </a> -->
+                    </div>
 
                 </div>
             </div>

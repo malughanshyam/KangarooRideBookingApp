@@ -10,6 +10,9 @@ module.exports = function(app) {
     // Import AdHocJob Controllers / Route Handlers
     var ReservationHandler = require('./controllers/ReservationHandler');
 
+    // Import AdHocJob Controllers / Route Handlers
+    var RidesManager = require('./controllers/RidesManagerHandler');
+
     // Get All Reservations
     app.get('/reservations', ReservationHandler.getAllReservations);
     
@@ -19,6 +22,9 @@ module.exports = function(app) {
     // Book new Reservation Job
     app.post('/bookNewReservation', ReservationHandler.bookNewReservation);
 
+    // Get All Rides
+    app.get('/allAvailableRides', RidesManager.getAllRides);
+    
 
     // Default Route
     app.get('/', function (req, res) {

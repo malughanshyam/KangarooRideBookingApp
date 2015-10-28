@@ -18,4 +18,4 @@ var schema = mongoose.Schema({
 });
 
 schema.index({ Email: 1, FirstName: 1, LastName: 1 }, { unique: true });
-module.exports = mongoose.model('ReservationsSchema', schema, 'ReservationsSchema');
+module.exports = mongoose.model('Reservations', schema, 'Reservations');

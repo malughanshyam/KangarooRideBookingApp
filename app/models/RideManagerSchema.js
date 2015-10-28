@@ -8,4 +8,4 @@ var schema = mongoose.Schema({
     CreatedTimeStamp: { type: Date, default:Date.now }
 });
 
-module.exports = mongoose.model('RidesManagerSchema', schema, 'RidesManagerSchema');
+module.exports = mongoose.model('RideManager', schema, 'RideManager');
