@@ -17,13 +17,22 @@ module.exports = function(app) {
     app.get('/reservations', ReservationHandler.getAllReservations);
     
     // Get a specific Reservation
-    app.get('/reservations/:ConfirmationCode', ReservationHandler.getAllReservationByConfirmationCode);
+    app.get('/reservationsByConfirmationCode/:ConfirmationCode', ReservationHandler.getAllReservationByConfirmationCode);
 
     // Book new Reservation Job
     app.post('/bookNewReservation', ReservationHandler.bookNewReservation);
 
+    // Get a Existing Reservations Count
+    //app.get('/remainingReservationsSlotsOfDay/:RideDateSelected', ReservationHandler.getRemainingReservationsSlotsOfDay);
+
+    // Get a Existing Reservations Count
+    app.get('/soldOutReservationSlotsOfDay/:RideDateSelected', ReservationHandler.getSoldOutReservationSlotsOfDay);
+
+    // Get a Existing Reservations Count
+    app.get('/existingReservations/:RideDateSelected/:RideTimeSelected', ReservationHandler.getExistingReservationsSlotCount);
+
     // Get All Rides
-    app.get('/allAvailableRides', RidesManager.getAllRides);
+    app.get('/allRidesAndAllowedSlotsInfo', RidesManager.getAllRidesAndAllowedSlotsInfo);
     
 
     // Default Route

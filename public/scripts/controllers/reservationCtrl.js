@@ -60,7 +60,7 @@ kangarooRideApp.directive('jqdatepicker', function() {
             $(function(){
                 element.datepicker({
                 	minDate:0,
-                    dateFormat:'dd/mm/yy',
+                    dateFormat:'mm-dd-yy',
                     onSelect:function (date) {
                         ngModelCtrl.$setViewValue(date);
                         scope.$apply();

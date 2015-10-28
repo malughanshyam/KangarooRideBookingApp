@@ -9,7 +9,7 @@ var schema = mongoose.Schema({
     LastName    	: String, 
     PhoneNumber 	: String,
     RideTypeSelected 	: String,
-    RideDateSelected 	: Date,
+    RideDateSelected 	: String,
     RideTimeSelected 	: String,
     SpecialNeeds    : String,    
     SubmittedByIP   : String,
@@ -18,4 +18,6 @@ var schema = mongoose.Schema({
 });
 
 schema.index({ Email: 1, FirstName: 1, LastName: 1 }, { unique: true });
+schema.index({ RideDateSelected: 1, RideTimeSelected: 1});
+schema.index({ RideDateSelected: 1});
 module.exports = mongoose.model('Reservations', schema, 'Reservations');
