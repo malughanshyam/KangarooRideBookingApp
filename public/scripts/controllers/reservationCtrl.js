@@ -12,7 +12,7 @@ kangarooRideApp.controller('kangarooRideCtrl', function($scope, $compile, $http)
 	$scope.newBooking.rideTypeSelected;
 	$scope.newBooking.rideDateSelected;
 	$scope.newBooking.rideTimeSelected;
-	$scope.newBooking.specialNeeds;
+	$scope.newBooking.specialNeeds = '';
 	$scope.newBookingStatus;
 
 	$scope.rideTypeAvailable = [
@@ -27,13 +27,9 @@ kangarooRideApp.controller('kangarooRideCtrl', function($scope, $compile, $http)
     $scope.rideTimesAvailableDisplayList = $scope.rideTimesAvailable
 
 	$scope.bookReservation = function(){
-		console.log("Submitting : ");
-		console.log($scope.newBooking);
 		$http.post('/bookNewReservation', $scope.newBooking)
             .success(function(data) {
                 $scope.newBooking.confirmationCode = data.confirmationCode;
-                console.log(data);
-                console.log(" $scope.newBooking.confirmationCode",  $scope.newBooking.confirmationCode);
                 // $scope.activateCurrentJobStatusTab()
             })
             .error(function(err) {
@@ -48,7 +44,7 @@ kangarooRideApp.controller('kangarooRideCtrl', function($scope, $compile, $http)
 		$scope.newBooking = {};
 	}	
 
-       
+
     $scope.populateAvailableRideSlots = function(){
 
         if (!$scope.form.rideDate.$valid) {
@@ -56,8 +52,6 @@ kangarooRideApp.controller('kangarooRideCtrl', function($scope, $compile, $http)
         }
 
         var getSoldOutReservationSlotsOfDay = '/soldOutReservationSlotsOfDay/'+$scope.newBooking.rideDateSelected;
-
-        console.log(getSoldOutReservationSlotsOfDay);
         
         $http.get(getSoldOutReservationSlotsOfDay)
             .success(function(data) {

@@ -157,7 +157,7 @@
                         <div class="input-group-addon"><i class="glyphicon glyphicon-time"></i></div>
                         <!-- <input type="text" class="form-control" name="rideTime" id="rideTimePicker" placeholder="Ride Time" ng-model="newBooking.rideTimeSelected" pattern=".{8,}" ng-pattern='/([01][012]|[0][0-9]):[0-5][0-9] ([A]|[P])M/' required title="Select a time for Ride" ng-maxlength=8 ng-minlength=8>
  -->
-                        <select class="form-control" name="repeatSelect" id="rideTime" name="rideTime" ng-model="newBooking.rideTimesSelected" required title="Select a type of Ride">
+                        <select class="form-control" name="repeatSelect" id="rideTime" name="rideTime" ng-model="newBooking.rideTimeSelected" required title="Select a type of Ride">
                             <option value="">---Please select---</option>
                             <!-- not selected / blank option -->
                             <option ng-repeat="slot in rideTimesAvailableDisplayList" value="{{slot}}">{{slot}}</option>
@@ -178,7 +178,8 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10 ">
-                    <button type="submit" class="btn btn-primary" ng-class="{ 'disabled' : (!form.$valid)}">Book Ride</button>
+                    <!-- <button type="submit" class="btn btn-primary" ng-class="{ 'disabled' : (!form.$valid)}">Book Ride</button> -->
+                    <button type="submit" class="btn btn-primary">Book Ride</button>
                     <button type="button" class="btn btn-default" ng-click="bookingReset()">Clear Entries</button>
                 </div>
             </div>

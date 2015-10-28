@@ -14,6 +14,13 @@ kangarooRideApp.controller('adminCtrl', function($scope, $compile, $http, kangar
         return kangarooAngularService.parseIsoDatetime(dateStr);
     }
 
+    // Flag for Show Popup while displaying long text of Special Needs 
+    $scope.showPopupFlag = function(text, limit) {
+        if (text.length > limit)
+            return true;
+        return false;
+    }
+       
     // Populate ReservationsTable
     $scope.populateReservationsTable = function() {
         var getReservations = '/reservations';

@@ -86,31 +86,31 @@
                                 </th>
 
                                 <th st-sort="FirstName" align="center">
-                                    <a tooltip="Click to sort by FirstName">FirstName</a>
+                                    <a tooltip="Click to sort by FirstName">First Name</a>
                                 </th>
 
                                 <th st-sort="FirstName" align="center">
-                                    <a tooltip="Click to sort by LastName">LastName</a>
+                                    <a tooltip="Click to sort by LastName">Last Name</a>
                                 </th>
 
                                 <th st-sort="PhoneNumber" align="center">
-                                    <a tooltip="Click to sort by PhoneNumber">PhoneNumber</a>
+                                    <a tooltip="Click to sort by PhoneNumber">Phone No.</a>
                                 </th>
 
                                 <th st-sort="RideTypeSelected" align="center">
-                                    <a tooltip="Click to sort by RideTypeSelected">RideTypeSelected</a>
+                                    <a tooltip="Click to sort by RideTypeSelected">Ride Type</a>
                                 </th>
 
                                 <th st-sort="RideDateSelected" align="center">
-                                    <a tooltip="Click to sort by RideDateSelected">RideDateSelected</a>
+                                    <a tooltip="Click to sort by RideDateSelected">Ride Date</a>
                                 </th>
 
                                 <th st-sort="RideTimeSelected" align="center">
-                                    <a tooltip="Click to sort by RideTimeSelected">RideTimeSelected</a>
+                                    <a tooltip="Click to sort by RideTimeSelected">Ride Time</a>
                                 </th>
 
                                 <th st-sort="SpecialNeeds" align="center">
-                                    <a tooltip="Click to sort by SpecialNeeds">SpecialNeeds</a>
+                                    <a tooltip="Click to sort by SpecialNeeds">Special Needs</a>
                                 </th>
 
                                 <!--      <th st-sort="SubmittedByIP" align="center">
@@ -149,7 +149,8 @@
 
                                     <td><small>{{row.RideTypeSelected}}<small></td>
 
-                                    <td><small>{{ parseIsoDatetime(row.RideDateSelected)}}<small></td>
+                                    <!-- <td><small>{{ parseIsoDatetime(row.RideDateSelected)}}<small></td> -->
+                                    <td><small>{{(row.RideDateSelected)}}<small></td>
 
                                     <td><small>{{row.RideTimeSelected}}<small></td>
 
