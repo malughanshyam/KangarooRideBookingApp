@@ -155,7 +155,7 @@
                                     <td><small>{{row.RideTimeSelected}}<small></td>
 
                                     <td>
-                                        <small>{{row.SpecialNeeds.substring(0, 40)}}</small>
+                                        <small>{{row.SpecialNeeds.substring(0, 20)}}</small>
                                     <a><small ng-show="showPopupFlag(row.SpecialNeeds,40)" popover="{{row.SpecialNeeds}}" popover-trigger="click"> ...<i class="fa fa-1x fa-eye"></i></small></a>
                                 </td>
 
@@ -235,8 +235,8 @@
                                     </th>
                                     <th>
                                         <div class="pull-right">
-                                            <button type="button" align="right" ng-click="showAddRideForm = !showAddRideForm" class="btn btn-xs btn-success" tooltip="Add Ride">
-                                                <i class="fa fa-plus-square-o"></i></span> 
+                                            <button type="button" align="right" ng-click="showAddRideForm = !showAddRideForm" class="btn btn-xs btn-info" tooltip="Add Ride">
+                                                <i class="glyphicon glyphicon-plus"></i></span> 
                                             </button>
                                         </div>
                                     </th>

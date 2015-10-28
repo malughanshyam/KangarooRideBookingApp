@@ -86,3 +86,18 @@ input.ng-valid {
 .errorMsg {
     color: red;
 }
+
+#bookingStatusPlaceholderDiv {
+    padding-top: 2em;
+    padding-bottom: 2em;
+    color: #FFCC00;
+}
+
+#bookingStatusPlaceholderDiv #success{
+    color: #99FF00;
+}
+
+#bookingStatusPlaceholderDiv #failed{
+    color: #FF6600;
+}
+

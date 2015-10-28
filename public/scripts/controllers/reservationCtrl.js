@@ -15,36 +15,61 @@ kangarooRideApp.controller('kangarooRideCtrl', function($scope, $compile, $http)
 	$scope.newBooking.specialNeeds = '';
 	$scope.newBookingStatus;
 
-	$scope.rideTypeAvailable = [
-      'Jumpy Joey Easy Ride',
-      'Big Bounder Down Under Ride',
-      'Deadly Outback Special'
-    ];
+	$scope.rideTypeAvailable=[];
 
-	
+	$scope.totalRideTimesAvailable = ['08:00 AM', '08:30 AM', '09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM', '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM'];
+    $scope.rideTimesAvailableDisplayList = $scope.totalRideTimesAvailable
 
-	$scope.rideTimesAvailable = ['08:00 AM', '08:30 AM', '09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM', '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM'];
-    $scope.rideTimesAvailableDisplayList = $scope.rideTimesAvailable
+    $scope.showFixErrorsButton = false;
+
+    // Activates a tab 
+    function activateTab(tab){
+        $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+    };
+
+    $scope.startNewBooking = function(){
+        $scope.bookingReset();
+        activateTab('newReservationTab');
+    }
+
+
+    $scope.fixBookingErrorsAndRebook = function(){
+        activateTab('newReservationTab');
+    }
 
 	$scope.bookReservation = function(){
-		$http.post('/bookNewReservation', $scope.newBooking)
+
+        activateTab('statusTab');
+
+        $('#bookingStatusPlaceholderDiv').html('<h3 align="center"> <i class="fa fa-spinner fa-pulse fa-3x "></i> <br><br> Booking your Ride ... </h3>');
+		
+        $http.post('/bookNewReservation', $scope.newBooking)
             .success(function(data) {
+                $scope.showFixErrorsButton=false;
                 $scope.newBooking.confirmationCode = data.confirmationCode;
-                // $scope.activateCurrentJobStatusTab()
+                $('#bookingStatusPlaceholderDiv').html('<h3 align="center" id="success"> <i  class="fa fa-check-square-o fa-3x "></i> <br>Booking Successful </h3>');
             })
             .error(function(err) {
                 console.log(err);
+                $scope.showFixErrorsButton=true;
                 $scope.newBooking.confirmationCode = err.error;
                 $scope.newBookingStatus = 'FAILED';
-                // $scope.activateCurrentJobStatusTab()
+                $('#bookingStatusPlaceholderDiv').html('<h3 align="center" id="failed"> <i  class="fa fa-exclamation-triangle fa-3x "></i> <br>Booking Failed </h3>');
+                $('#bookingStatusPlaceholderDiv').append('<div align="center"> <h3>Error</h3>' + err.error + '</div>') 
             });
 	}
 
+    //Reset the form
 	$scope.bookingReset = function(){
 		$scope.newBooking = {};
+        $scope.newBooking.specialNeeds = '';
+        $('#emailInputId').val('');
+        $('#phoneNumber').val('');
+        $('#rideDate').val('');
+        $scope.form.phoneNumber.$error.pattern = false
+        $scope.form.rideDate.$error.pattern = false
+        $scope.form.$setPristine();
 	}	
-
-
 
     $scope.populateAvailableRideTypes = function(){
 
@@ -70,7 +95,7 @@ kangarooRideApp.controller('kangarooRideCtrl', function($scope, $compile, $http)
         
         $http.get(getSoldOutReservationSlotsOfDay)
             .success(function(data) {
-                $scope.rideTimesAvailableDisplayList = $scope.rideTimesAvailable
+                $scope.rideTimesAvailableDisplayList = $scope.totalRideTimesAvailable
                 for (slot in data.soldOutSlotList){
                     var i = $scope.rideTimesAvailableDisplayList.indexOf(data.soldOutSlotList[slot]);
                     if(i != -1) {
@@ -78,16 +103,6 @@ kangarooRideApp.controller('kangarooRideCtrl', function($scope, $compile, $http)
                     }
                     
                 }
-                /*$('#rideTimePicker').timepicker({
-                            'useSelect': true,
-                            'noneOption': '--Select--',
-                            'timeFormat': 'h:i A',
-                            'minTime': '8:00am',
-                            'maxTime': '4:30pm',
-                            'step': 30,
-                            'disableTimeRanges': $scope.soldOutReservationSlotsOfDay
-                        });*/
-
             })
             .error(function(err) {
                 console.log('Fetching soldOutReservationSlotsOfDay Failed :' + err);

@@ -19,8 +19,8 @@
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="/scripts/vendor/jquery.timepicker.min.js"></script>
     <script src="/scripts/vendor/jquery.mask.min.js"></script>
-   
-    
+
+
 
 
 
@@ -65,128 +65,159 @@
     <!-- container -->
     <div class="container" role="main" ng-controller="kangarooRideCtrl">
 
-        <div id="homeTab" class="tab-pane fade in active">
-            <div class="page-header text-center">
-                <h1 class="hidden-xs">Crazy Calvin’s Kangaroo Rides<br>
-                        <h3 id="subHeading" class="hidden-xs">Hurl-a-Whirl !!!</h3>
-                </h1>
-                <h3 class="visible-xs-block">Crazy Calvin’s Kangaroo Rides<br>
-                        <h4 id="subHeading" class="visible-xs-block">Hurl-a-Whirl !!!</h3>
-                </h1>
-            </div>
+        <div class="page-header text-center">
+            <h1 class="hidden-xs">Crazy Calvin’s Kangaroo Rides<br>
+                    <h3 id="subHeading" class="hidden-xs">Hurl-a-Whirl !!!</h3>
+            </h1>
+            <h3 class="visible-xs-block">Crazy Calvin’s Kangaroo Rides<br>
+                    <h4 id="subHeading" class="visible-xs-block">Hurl-a-Whirl !!!</h4>
+            </h3>
         </div>
 
-        <form name="form" id="newReservationForm" class="form-horizontal col-md-offset-2 col-lg-offset-2 col-xs-offset-1 col-xs-10" ng-submit="bookReservation()">
 
-            <div class="form-group">
-                <label for="fname" class="col-sm-2 control-label hidden-xs">First Name</label>
-                <div class="col-sm-10 col-lg-6 ">
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="glyphicon glyphicon-user"></i></div>
-                        <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" ng-model="newBooking.firstName" required title="Enter a valid First Name">
+        <div>
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist" ng-hide="true">
+            <li role="presentation" class="active"><a href="#newReservationTab" aria-controls="newReservationTab" role="tab" data-toggle="tab">New Reservation</a></li>
+            <li role="presentation"><a href="#statusTab" aria-controls="statusTab" role="tab" data-toggle="tab">Status</a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="newReservationTab">
+
+                <form name="form" id="newReservationForm" class="form-horizontal col-md-offset-2 col-lg-offset-2 col-xs-offset-1 col-xs-10" ng-submit="bookReservation()">
+
+                    <div class="form-group">
+                        <label for="fname" class="col-sm-2 control-label hidden-xs">First Name</label>
+                        <div class="col-sm-10 col-lg-6 ">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="glyphicon glyphicon-user"></i></div>
+                                <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" ng-model="newBooking.firstName" required title="Enter a valid First Name">
+                            </div>
+                        </div>
+                        <span ng-show="!form.fname.$pristine && form.fname.$error.required" class="errorMsg">Required!</span>
                     </div>
-                </div>
-                <span ng-show="!form.fname.$pristine && form.fname.$error.required" class="errorMsg">Required!</span>
-            </div>
 
-            <div class="form-group">
-                <label for="lname" class="col-sm-2 control-label hidden-xs">Last Name</label>
-                <div class="col-sm-10 col-lg-6 ">
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="glyphicon glyphicon-user"></i></div>
-                        <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" ng-model="newBooking.lastName" required title="Enter a valid Last Name">
+                    <div class="form-group">
+                        <label for="lname" class="col-sm-2 control-label hidden-xs">Last Name</label>
+                        <div class="col-sm-10 col-lg-6 ">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="glyphicon glyphicon-user"></i></div>
+                                <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" ng-model="newBooking.lastName" required title="Enter a valid Last Name">
+                            </div>
+                        </div>
+                        <span ng-show="!form.lname.$pristine && form.lname.$error.required" class="errorMsg">Required!</span>
                     </div>
-                </div>
-                <span ng-show="!form.lname.$pristine && form.lname.$error.required" class="errorMsg">Required!</span>
-            </div>
 
-            <div class="form-group">
-                <label for="email" class="col-sm-2 control-label hidden-xs">Email</label>
-                <div class="col-sm-10 col-lg-6 ">
-                    <div class="input-group">
-                        <div class="input-group-addon">@</div>
-                        <input type="email" class="form-control" name="emailInput" id="emailInputId" placeholder="john@domain.com" ng-model="newBooking.email" required title="Enter a valid Email">
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label hidden-xs">Email</label>
+                        <div class="col-sm-10 col-lg-6 ">
+                            <div class="input-group">
+                                <div class="input-group-addon">@</div>
+                                <input type="email" class="form-control" name="emailInput" id="emailInputId" placeholder="john@domain.com" ng-model="newBooking.email" required title="Enter a valid Email">
+                            </div>
+                        </div>
+                        <span ng-show="!form.emailInput.$pristine && form.emailInput.$error.required" class="errorMsg">Required!</span>
                     </div>
-                </div>
-                <span ng-show="!form.emailInput.$pristine && form.emailInput.$error.required" class="errorMsg">Required!</span>
-            </div>
 
-            <div class="form-group">
-                <label for="email" class="col-sm-2 control-label hidden-xs">Phone Number</label>
-                <div class="col-sm-10 col-lg-6">
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></div>
-                        <input type="text" class="form-control phone_us" name="phoneNumber" id="phoneNumber" placeholder="(555) 555-5555" ng-model="newBooking.phoneNumber" pattern=".{14,}" required title="(___) ___-____">
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label hidden-xs">Phone Number</label>
+                        <div class="col-sm-10 col-lg-6">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></div>
+                                <input type="text" class="form-control phone_us" name="phoneNumber" id="phoneNumber" placeholder="(555) 555-5555" ng-model="newBooking.phoneNumber" pattern=".{14,}" required title="(___) ___-____">
+                            </div>
+                        </div>
+                        <span ng-show="!form.phoneNumber.$pristine && form.phoneNumber.$error.required" class="errorMsg">Required!</span>
+                        <span ng-show="form.phoneNumber.$error.pattern" class="errorMsg">Incorrect Format, should be (___) ___-____</span>
                     </div>
-                </div>
-                <span ng-show="!form.phoneNumber.$pristine && form.phoneNumber.$error.required" class="errorMsg">Required!</span>
-                <span ng-show="form.phoneNumber.$error.pattern" class="errorMsg">Incorrect Format, should be (___) ___-____</span>
-            </div>
 
-            <div class="form-group">
-                <label for="email" class="col-sm-2 control-label hidden-xs">Ride Type</label>
-                <div class="col-sm-10 col-lg-6 ">
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-pied-piper-alt"></i></div>
-                        <select name="repeatSelect" class="form-control"  id="rideType" name="rideType" ng-model="newBooking.rideTypeSelected" required title="Select a type of Ride">
-                            <option value="">---Please select---</option>
-                            <!-- not selected / blank option -->
-                            <option ng-repeat="option in rideTypeAvailable" value="{{option}}">{{option}}</option>
-                        </select>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label hidden-xs">Ride Type</label>
+                        <div class="col-sm-10 col-lg-6 ">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-pied-piper-alt"></i></div>
+                                <select name="repeatSelect" class="form-control" id="rideType" name="rideType" ng-model="newBooking.rideTypeSelected" required title="Select a type of Ride">
+                                    <option value="">---Please select---</option>
+                                    <!-- not selected / blank option -->
+                                    <option ng-repeat="option in rideTypeAvailable" value="{{option}}">{{option}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <span ng-show="!form.rideType.$pristine && form.rideType.$error.required" class="errorMsg">Required!</span>
                     </div>
-                </div>
-                <span ng-show="!form.rideType.$pristine && form.rideType.$error.required" class="errorMsg">Required!</span>
-            </div>
 
-            <div class="form-group">
-                <label for="rideDate" class="col-sm-2 control-label hidden-xs">Ride Date</label>
-                <div class="col-sm-10 col-lg-6 ">
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
-                        <input type="text" name="rideDate" class="form-control" id="rideDate" placeholder="Ride Date" ng-model="newBooking.rideDateSelected" jqdatepicker required title="Select a date for Ride" ng-change="populateAvailableRideSlots()" ng-pattern='/(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])-(2\d{3})/' maxlength="10" ng-maxlength=10 ng-minlength=10>
+                    <div class="form-group">
+                        <label for="rideDate" class="col-sm-2 control-label hidden-xs">Ride Date</label>
+                        <div class="col-sm-10 col-lg-6 ">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
+                                <input type="text" name="rideDate" class="form-control" id="rideDate" placeholder="Ride Date" ng-model="newBooking.rideDateSelected" jqdatepicker required title="Select a date for Ride" ng-change="populateAvailableRideSlots()" ng-pattern='/(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])-(2\d{3})/' maxlength="10" ng-maxlength=10 ng-minlength=10>
+                            </div>
+                        </div>
+                        <span ng-show="!form.rideDate.$pristine && form.rideDate.$error.required" class="errorMsg">Date Required!</span>
+                        <span ng-show="form.rideDate.$error.pattern" class="errorMsg">Incorrect Format, should be MM-DD-YYYY</span>
                     </div>
-                </div>
-                <span ng-show="!form.rideDate.$pristine && form.rideDate.$error.required" class="errorMsg">Date Required!</span>
-                <span ng-show="form.rideDate.$error.pattern" class="errorMsg">Incorrect Format, should be MM-DD-YYYY</span>
-            </div>
 
-            <div class="form-group">
-                <label for="rideTimePicker" class="col-sm-2 control-label hidden-xs">Ride Time</label>
-                <div class="col-sm-10 col-lg-6 ">
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="glyphicon glyphicon-time"></i></div>
-                        <!-- <input type="text" class="form-control" name="rideTime" id="rideTimePicker" placeholder="Ride Time" ng-model="newBooking.rideTimeSelected" pattern=".{8,}" ng-pattern='/([01][012]|[0][0-9]):[0-5][0-9] ([A]|[P])M/' required title="Select a time for Ride" ng-maxlength=8 ng-minlength=8>
- -->
-                        <select class="form-control" name="repeatSelect" id="rideTime" name="rideTime" ng-model="newBooking.rideTimeSelected" required title="Select a type of Ride">
-                            <option value="">---Please select---</option>
-                            <!-- not selected / blank option -->
-                            <option ng-repeat="slot in rideTimesAvailableDisplayList" value="{{slot}}">{{slot}}</option>
-                        </select>
+                    <div class="form-group">
+                        <label for="rideTimePicker" class="col-sm-2 control-label hidden-xs">Ride Time</label>
+                        <div class="col-sm-10 col-lg-6 ">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="glyphicon glyphicon-time"></i></div>
+                                <select class="form-control" name="repeatSelect" id="rideTime" name="rideTime" ng-model="newBooking.rideTimeSelected" required title="Select a type of Ride">
+                                    <option value="">---Please select---</option>
+                                    <option ng-repeat="slot in rideTimesAvailableDisplayList" value="{{slot}}">{{slot}}</option>
+                                </select>
 
+                            </div>
+                        </div>
+                        <span ng-show="!form.rideTime.$pristine && form.rideTime.$error.required" class="errorMsg">Required!</span>
+                        <span ng-show="form.rideTime.$error.pattern" class="errorMsg">Incorrect Format, should be HH:MM AA</span>
                     </div>
-                </div>
-                <span ng-show="!form.rideTime.$pristine && form.rideTime.$error.required" class="errorMsg">Required!</span>
-                <span ng-show="form.rideTime.$error.pattern" class="errorMsg">Incorrect Format, should be HH:MM AA</span>
+
+                    <div class="form-group">
+                        <label for="splNeeds" class="col-sm-2 control-label hidden-xs">Special Needs</label>
+                        <div class="col-sm-10 col-lg-6 ">
+                            <textarea class="form-control" id="splNeeds" ng-model="newBooking.specialNeeds" rows="2" placeholder="Any special needs ?"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10 ">
+                            <!-- <button type="submit" class="btn btn-primary" ng-class="{ 'disabled' : (!form.$valid)}">Book Ride</button> -->
+                            <button type="submit" class="btn btn-primary">Book Ride</button>
+                            <button type="button" class="btn btn-default" ng-click="bookingReset()">Clear Entries</button>
+                        </div>
+                    </div>
+
+                </form>
+
             </div>
+            <div role="tabpanel" class="tab-pane" id="statusTab">
 
-            <div class="form-group">
-                <label for="splNeeds" class="col-sm-2 control-label hidden-xs">Special Needs</label>
-                <div class="col-sm-10 col-lg-6 ">
-                    <textarea class="form-control" id="splNeeds" ng-model="newBooking.specialNeeds" rows="2" placeholder="Any special needs ?"></textarea>
+                <div id="bookingStatusPlaceholderDiv"></div>
+
+                <div align="center">
+                    <button id='activateNewReservationTabBtn' type="button" ng-click="startNewBooking()" class="btn btn-success">
+                        <i class="fa fa-plus"></i> Book New Ride
+                    </button>
+
+                    <button id='activateNewReservationTabBtn' type="button" ng-show="showFixErrorsButton" ng-click="fixBookingErrorsAndRebook()" class="btn btn-info">
+                        <i class="fa fa-magic"></i> Fix Errors and Rebook
+                    </button>
+
                 </div>
+
             </div>
+          </div>
 
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10 ">
-                    <!-- <button type="submit" class="btn btn-primary" ng-class="{ 'disabled' : (!form.$valid)}">Book Ride</button> -->
-                    <button type="submit" class="btn btn-primary">Book Ride</button>
-                    <button type="button" class="btn btn-default" ng-click="bookingReset()">Clear Entries</button>
-                </div>
-            </div>
+        </div>
 
-        </form>
 
-        <!-- <pre> {{newBooking}} </pre> -->
+
+
 
     </div>
     <!-- /container -->
@@ -222,19 +253,18 @@
             //     ['3:30pm', '4pm']
             // ]
 
-            'disableTimeRanges':  [
+            'disableTimeRanges': [
                 // ['02:30pm', '03:00pm']
                 [
                     "02:30 PM",
                     "02:31 PM"
-                  ]
+                ]
             ]
         });
 
 
-  $('.phone_us').mask('(000) 000-0000');
-  $('.rideDate').mask('mm-dd-yyyy');
-
+        $('.phone_us').mask('(000) 000-0000');
+        $('.rideDate').mask('mm-dd-yyyy');
     </script>
 </body>
 

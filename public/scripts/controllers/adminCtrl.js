@@ -75,6 +75,7 @@ kangarooRideApp.controller('adminCtrl', function($scope, $compile, $http, kangar
     }
 
     $scope.changeRidesPerSlot = function(){
+
          $http.post('/changeRidesPerSlot', $scope.newRidesPerSlot)
             .success(function(data) {
                 $scope.newRidesPerSlot.newRidesPerSlotValue = '';

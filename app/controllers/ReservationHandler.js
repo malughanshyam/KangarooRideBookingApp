@@ -118,7 +118,9 @@ exports.getAllReservations = function(req, res) {
                 error: err
             }));
             res.status(500)
-            return res.send(err)
+            return res.send(JSON.stringify({
+                    error:err.message
+                }));
         } else {
             log.debug(' GET - Retrieved all Reservations');
             res.send(reservations);
@@ -165,7 +167,9 @@ exports.getAllReservationByConfirmationCode = function(req, res) {
                 error: err
             }));
             res.status(500)
-            return res.send(err)
+            return res.send(JSON.stringify({
+                    error:err.message
+                }));
         }
     });
 }
@@ -226,15 +230,15 @@ exports.getExistingReservationsSlotCount = function(req, res) {
                 error: err
             }));
             res.status(500);
-            return res.send(err);
+            return res.send(JSON.stringify({
+                    error:err.message
+                }));
         }
         log.debug(' GET - Retrieved all Rides');
         res.send({
             RideTimeSelected: data[0]._id.RideTimeSelected,
             count: data[0].count
         });
-        // res.send(data[0]);
-        console.log(data);
     });
 
 }

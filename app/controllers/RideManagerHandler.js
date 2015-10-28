@@ -22,8 +22,10 @@ exports.getAllRidesAndAllowedSlotsInfo = function(req, res) {
                 clientIPaddress: clientIPaddress,
                 error: err
             }));
-            res.status(500)
-            return res.send(err)
+            res.status(500);
+            return res.send(JSON.stringify({
+                    error:err.message
+                }));
         } else {
             log.debug(' GET - AllRidesAndAllowedSlotsInfo');
             res.send(data);
@@ -74,9 +76,13 @@ exports.addNewRide = function(req,res){
                 log.info('New Ride - "%s" added to the database', newRide);
                 
                 RideManager.findOne(function(err, data) {
-                    if (err)
-                        res.send(err.message)
-                    res.send(data);
+                    if (err){
+                            return res.send(JSON.stringify({
+                                    error:err.message
+                                    }));
+                    } else {
+                        res.send(data);                        
+                    }
                 });
 
             }
@@ -125,9 +131,13 @@ exports.changeRidesPerSlot = function(req,res){
                 log.info('New allowedRidesPerSlot value- "%s" added to the database', newRidesPerSlotValue);
                 
                 RideManager.findOne(function(err, data) {
-                    if (err)
-                        res.send(err.message)
-                    res.send(data);
+                    if (err){
+                        return res.send(JSON.stringify({
+                                error:err.message
+                                }));
+                    } else {
+                        res.send(data);                        
+                    }
                 });
 
             }
