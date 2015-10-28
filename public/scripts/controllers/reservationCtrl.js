@@ -16,15 +16,15 @@ kangarooRideApp.controller('kangarooRideCtrl', function($scope, $compile, $http)
 	$scope.newBookingStatus;
 
 	$scope.rideTypeAvailable = [
-      {id: 'JJER', name: 'Jumpy Joey Easy Ride'},
-      {id: 'BBDUR', name: 'Big Bounder Down Under Ride'},
-      {id: 'DOS', name: 'Deadly Outback Special'}
+      'Jumpy Joey Easy Ride',
+      'Big Bounder Down Under Ride',
+      'Deadly Outback Special'
     ];
 
 	
 
-	$scope.rideTimesAvailable = ['08:00a', '08:30a', '09:00a', '09:30a', '10:00a', '10:30a', '11:00a', '11:30a', '12:00p', '12:30p', '01:00p', '01:30p', '02:00p', '02:30p', '03:00p', '03:30p', '04:00p', '04:30p'];
-
+	$scope.rideTimesAvailable = ['08:00 AM', '08:30 AM', '09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM', '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM'];
+    $scope.rideTimesAvailableDisplayList = $scope.rideTimesAvailable
 
 	$scope.bookReservation = function(){
 		console.log("Submitting : ");
@@ -49,6 +49,43 @@ kangarooRideApp.controller('kangarooRideCtrl', function($scope, $compile, $http)
 	}	
 
        
+    $scope.populateAvailableRideSlots = function(){
+
+        if (!$scope.form.rideDate.$valid) {
+            return;
+        }
+
+        var getSoldOutReservationSlotsOfDay = '/soldOutReservationSlotsOfDay/'+$scope.newBooking.rideDateSelected;
+
+        console.log(getSoldOutReservationSlotsOfDay);
+        
+        $http.get(getSoldOutReservationSlotsOfDay)
+            .success(function(data) {
+                $scope.rideTimesAvailableDisplayList = $scope.rideTimesAvailable
+                for (slot in data.soldOutSlotList){
+                    var i = $scope.rideTimesAvailableDisplayList.indexOf(data.soldOutSlotList[slot]);
+                    if(i != -1) {
+                        $scope.rideTimesAvailableDisplayList.splice(i, 1);
+                    }
+                    
+                }
+                /*$('#rideTimePicker').timepicker({
+                            'useSelect': true,
+                            'noneOption': '--Select--',
+                            'timeFormat': 'h:i A',
+                            'minTime': '8:00am',
+                            'maxTime': '4:30pm',
+                            'step': 30,
+                            'disableTimeRanges': $scope.soldOutReservationSlotsOfDay
+                        });*/
+
+            })
+            .error(function(err) {
+                console.log('Fetching soldOutReservationSlotsOfDay Failed :' + err);
+            });
+        
+    }
+     
 });
 
 

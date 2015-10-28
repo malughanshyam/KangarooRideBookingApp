@@ -128,10 +128,10 @@
                 <div class="col-sm-10 col-lg-6 ">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-pied-piper-alt"></i></div>
-                        <select name="repeatSelect" id="rideType" name="rideType" ng-model="newBooking.rideTypeSelected" required title="Select a type of Ride">
+                        <select name="repeatSelect" class="form-control"  id="rideType" name="rideType" ng-model="newBooking.rideTypeSelected" required title="Select a type of Ride">
                             <option value="">---Please select---</option>
                             <!-- not selected / blank option -->
-                            <option ng-repeat="option in rideTypeAvailable" value="{{option.id}}">{{option.name}}</option>
+                            <option ng-repeat="option in rideTypeAvailable" value="{{option}}">{{option}}</option>
                         </select>
                     </div>
                 </div>
@@ -155,8 +155,14 @@
                 <div class="col-sm-10 col-lg-6 ">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="glyphicon glyphicon-time"></i></div>
-                        <input type="text" class="form-control" name="rideTime" id="rideTimePicker" placeholder="Ride Time" ng-model="newBooking.rideTimeSelected" pattern=".{8,}" ng-pattern='/([01][012]|[0][0-9]):[0-5][0-9] ([A]|[P])M/' required title="Select a time for Ride" ng-maxlength=8 ng-minlength=8>
+                        <!-- <input type="text" class="form-control" name="rideTime" id="rideTimePicker" placeholder="Ride Time" ng-model="newBooking.rideTimeSelected" pattern=".{8,}" ng-pattern='/([01][012]|[0][0-9]):[0-5][0-9] ([A]|[P])M/' required title="Select a time for Ride" ng-maxlength=8 ng-minlength=8>
+ -->
+                        <select class="form-control" name="repeatSelect" id="rideTime" name="rideTime" ng-model="newBooking.rideTimesSelected" required title="Select a type of Ride">
+                            <option value="">---Please select---</option>
+                            <!-- not selected / blank option -->
+                            <option ng-repeat="slot in rideTimesAvailableDisplayList" value="{{slot}}">{{slot}}</option>
                         </select>
+
                     </div>
                 </div>
                 <span ng-show="!form.rideTime.$pristine && form.rideTime.$error.required" class="errorMsg">Required!</span>
@@ -210,9 +216,17 @@
             'minTime': '8:00am',
             'maxTime': '4:30pm',
             'step': 30,
-            'disableTimeRanges': [
-                ['9am', '10am'],
-                ['3:30pm', '4pm']
+            // 'disableTimeRanges': [
+            //     ['9am', '10am'],
+            //     ['3:30pm', '4pm']
+            // ]
+
+            'disableTimeRanges':  [
+                // ['02:30pm', '03:00pm']
+                [
+                    "02:30 PM",
+                    "02:31 PM"
+                  ]
             ]
         });
 
