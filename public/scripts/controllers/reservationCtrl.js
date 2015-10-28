@@ -45,6 +45,21 @@ kangarooRideApp.controller('kangarooRideCtrl', function($scope, $compile, $http)
 	}	
 
 
+
+    $scope.populateAvailableRideTypes = function(){
+
+        var getAllRidesAndAllowedSlotsInfo = '/allRidesAndAllowedSlotsInfo';
+        
+        $http.get(getAllRidesAndAllowedSlotsInfo)
+            .success(function(data) {
+                $scope.rideTypeAvailable = data.availableRides
+            })
+            .error(function(err) {
+                console.log('Fetching available ride types failed :' + err);
+            });
+        
+    }
+
     $scope.populateAvailableRideSlots = function(){
 
         if (!$scope.form.rideDate.$valid) {
@@ -79,6 +94,8 @@ kangarooRideApp.controller('kangarooRideCtrl', function($scope, $compile, $http)
             });
         
     }
+
+    $scope.populateAvailableRideTypes();
      
 });
 

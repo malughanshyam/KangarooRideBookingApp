@@ -26,7 +26,12 @@ table th {
 }
 
 }
-label {
+
+body label{
+    color: #fff;
+}
+
+body label{
     color: #fff;
     font-family: "Segoe UI Light","Helvetica Neue","Segoe UI","Segoe WP",sans-serif;
     font-weight: 400;
@@ -68,6 +73,9 @@ select, input{
     height:30px;
 }
 
+#newRidesPerSlot {
+    width: 70px;
+}
 /*input.ng-invalid {
   border: 1px solid red;
 }

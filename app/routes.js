@@ -36,6 +36,9 @@ module.exports = function(app) {
 
     // Add new ride
     app.post('/addNewRide', RideManager.addNewRide);
+
+    // Change Rides Allowed Per Slot
+    app.post('/changeRidesPerSlot', RideManager.changeRidesPerSlot);
     
     
     // Default Route

@@ -86,3 +86,54 @@ exports.addNewRide = function(req,res){
 
     }
 }
+
+exports.changeRidesPerSlot = function(req,res){
+
+    res.set('Access-Control-Allow-Origin', '*');
+
+    var clientIPaddress = req.ip || req.header('x-forwarded-for') || req.connection.remoteAddress;
+    var newRidesPerSlotValue = req.body.newRidesPerSlotValue
+
+    var sendError = function(msg) {
+        log.error('Error updating the Rides Allowed Per Slot: %s', JSON.stringify({
+            error: msg
+        }));
+        res.status(500)
+        res.send(JSON.stringify({
+            error: msg
+        }));
+    }
+
+    if (!newRidesPerSlotValue){
+        return sendError("newRidesPerSlotValue invalid. Please correct and resubmit");
+    } else{
+
+        // Add a ride
+        var query = {};
+        var updateFields = {
+            $set: { "allowedRidesPerSlot": newRidesPerSlotValue },
+            $currentDate: { "UpdatedTimeStamp": true } 
+        };
+
+        function callback(err) {
+            if (err) {
+                 return sendError("Error updating allowedRidesPerSlot :" + err.message ); 
+                 log.error('Error updating allowedRidesPerSlot :%s', JSON.stringify({
+                    error: err
+                }));
+            } else {
+                log.info('New allowedRidesPerSlot value- "%s" added to the database', newRidesPerSlotValue);
+                
+                RideManager.findOne(function(err, data) {
+                    if (err)
+                        res.send(err.message)
+                    res.send(data);
+                });
+
+            }
+        }
+
+        RideManager.findOneAndUpdate(query, updateFields, callback)
+
+    }
+}
