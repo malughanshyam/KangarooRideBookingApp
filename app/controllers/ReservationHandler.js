@@ -23,7 +23,8 @@ var log = winston.loggers.get('log');
 
 
 // Include the MongoDB Schema 
-Reservations = require('../models/Reservations');
+Reservations = require('../models/ReservationsSchema');
+RideTypesAvailable = require('../models/RidesManagerSchema');
 
 // Get all the Reservations
 exports.getAllReservations = function(req, res) {

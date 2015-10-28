@@ -51,81 +51,93 @@
     <!-- container -->
     <div class="container" role="main" ng-controller="adminCtrl">
 
-        <div id="homeTab" class="tab-pane fade in active">
-            <div class="page-header text-center">
-                <h1 class="hidden-xs">Crazy Calvin’s Kangaroo Rides<br>
+
+        <div class="page-header text-center">
+            <h1 class="hidden-xs">Crazy Calvin’s Kangaroo Rides<br>
                         <h3 id="subHeading" class="hidden-xs">Hurl-a-Whirl !!!</h3>
                 </h1>
-                <h3 class="visible-xs-block">Crazy Calvin’s Kangaroo Rides<br>
+            <h3 class="visible-xs-block">Crazy Calvin’s Kangaroo Rides<br>
                         <h4 id="subHeading" class="visible-xs-block">Hurl-a-Whirl !!!</h3>
-                </h1>
-            </div>
+            </h1>
         </div>
-                        <table id="reservationsTable" st-table="displayedCollection" st-safe-src="reservations" class="table table-responsive ">
-                            <thead>
-                                <tr>
-                                    <!-- <th st-sort="JobID">JobID</th> -->
-                                    <th st-sort="ConfirmationCode" style="white-space: nowrap">
-                                        <a tooltip="Click to sort by ConfirmationCode">ConfirmationCode</a>
-                                    </th>
 
-                                    <th st-sort="Email">
-                                        <a tooltip="Click to sort by Email">Email</a>
-                                    </th>
+        <div>
 
-                                    <th st-sort="FirstName" align="center">
-                                        <a tooltip="Click to sort by FirstName">FirstName</a>
-                                    </th>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+                <li role="presentation" class="active"><a href="#reservations" aria-controls="reservations" role="tab" data-toggle="tab">Reservations</a></li>
+                <li role="presentation"><a href="#rides" aria-controls="rides" role="tab" data-toggle="tab">Manage Rides</a></li>
+            </ul>
 
-                                    <th st-sort="FirstName" align="center">
-                                        <a tooltip="Click to sort by LastName">LastName</a>
-                                    </th>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="reservations">
 
-                                    <th st-sort="PhoneNumber" align="center">
-                                        <a tooltip="Click to sort by PhoneNumber">PhoneNumber</a>
-                                    </th>
+                    <table id="reservationsTable" st-table="displayedCollection" st-safe-src="reservations" class="table table-responsive ">
+                        <thead>
+                            <tr>
+                                <!-- <th st-sort="JobID">JobID</th> -->
+                                <th st-sort="ConfirmationCode" style="white-space: nowrap">
+                                    <a tooltip="Click to sort by ConfirmationCode">ConfirmationCode</a>
+                                </th>
 
-                                    <th st-sort="RideTypeSelected" align="center">
-                                        <a tooltip="Click to sort by RideTypeSelected">RideTypeSelected</a>
-                                    </th>
+                                <th st-sort="Email">
+                                    <a tooltip="Click to sort by Email">Email</a>
+                                </th>
 
-                                    <th st-sort="RideDateSelected" align="center">
-                                        <a tooltip="Click to sort by RideDateSelected">RideDateSelected</a>
-                                    </th>
+                                <th st-sort="FirstName" align="center">
+                                    <a tooltip="Click to sort by FirstName">FirstName</a>
+                                </th>
 
-                                    <th st-sort="RideTimeSelected" align="center">
-                                        <a tooltip="Click to sort by RideTimeSelected">RideTimeSelected</a>
-                                    </th>
+                                <th st-sort="FirstName" align="center">
+                                    <a tooltip="Click to sort by LastName">LastName</a>
+                                </th>
 
-                                    <th st-sort="SpecialNeeds" align="center">
-                                        <a tooltip="Click to sort by SpecialNeeds">SpecialNeeds</a>
-                                    </th>
+                                <th st-sort="PhoneNumber" align="center">
+                                    <a tooltip="Click to sort by PhoneNumber">PhoneNumber</a>
+                                </th>
 
-                               <!--      <th st-sort="SubmittedByIP" align="center">
+                                <th st-sort="RideTypeSelected" align="center">
+                                    <a tooltip="Click to sort by RideTypeSelected">RideTypeSelected</a>
+                                </th>
+
+                                <th st-sort="RideDateSelected" align="center">
+                                    <a tooltip="Click to sort by RideDateSelected">RideDateSelected</a>
+                                </th>
+
+                                <th st-sort="RideTimeSelected" align="center">
+                                    <a tooltip="Click to sort by RideTimeSelected">RideTimeSelected</a>
+                                </th>
+
+                                <th st-sort="SpecialNeeds" align="center">
+                                    <a tooltip="Click to sort by SpecialNeeds">SpecialNeeds</a>
+                                </th>
+
+                                <!--      <th st-sort="SubmittedByIP" align="center">
                                         <a tooltip="Click to sort by SubmittedByIP">SubmittedByIP</a>
                                     </th> -->
 
-                                    <th st-sort="UpdatedTimeStamp" st-sort-default="reverse">
-                                        <a tooltip="Click to sort by TimeStamp">Last Modified</a>
-                                    </th>
+                                <th st-sort="UpdatedTimeStamp" st-sort-default="reverse">
+                                    <a tooltip="Click to sort by TimeStamp">Last Modified</a>
+                                </th>
 
-                                </tr>
-                                <tr>
-                                    <th colspan="10">
-                                        <div class="input-group col-xs-12">
-                                            <span class="input-group-addon" id="basic-addon1"> 
+                            </tr>
+                            <tr>
+                                <th colspan="10">
+                                    <div class="input-group col-xs-12">
+                                        <span class="input-group-addon" id="basic-addon1"> 
                                                 <i class="fa fa-1x fa-search"></i>  
                                             </span>
-                                            <input st-search="" class="form-control" placeholder="Search by anything (Email, First Name, Last Name...)" type="text" aria-describedby="basic-addon1" />
+                                        <input st-search="" class="form-control" placeholder="Search by anything (Email, First Name, Last Name...)" type="text" aria-describedby="basic-addon1" />
 
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
 
-                            <tbody>
-                                <tr ng-repeat="row in displayedCollection">
-                                    <td><small>{{row.ConfirmationCode}}<small></td>
+                        <tbody>
+                            <tr ng-repeat="row in displayedCollection">
+                                <td><small>{{row.ConfirmationCode}}<small></td>
 
                                     <td><small>{{row.Email}}<small></td>
 
@@ -143,21 +155,21 @@
 
                                     <td>
                                         <small>{{row.SpecialNeeds.substring(0, 40)}}</small>
-                                        <a><small ng-show="showPopupFlag(row.SpecialNeeds,40)" popover="{{row.SpecialNeeds}}" popover-trigger="click"> ...<i class="fa fa-1x fa-eye"></i></small></a>
-                                    </td>
+                                    <a><small ng-show="showPopupFlag(row.SpecialNeeds,40)" popover="{{row.SpecialNeeds}}" popover-trigger="click"> ...<i class="fa fa-1x fa-eye"></i></small></a>
+                                </td>
 
-                                   <!--  <td>
+                                <!--  <td>
                                         <i tooltip="JOB_SUCCESSFUL" id="statusSuccess" class="fa fa-check-square" ng-show="row.JobRunStatus=='JOB_SUCCESSFUL'"> Success</i>
                                         <i tooltip="JOB_FAILED" id="statusFail" class="fa fa-exclamation-triangle" ng-show="row.JobRunStatus=='JOB_FAILED'"> Failed</i>
                                         <i tooltip="JOB_IN_PROGRESS" id="statusRunning" class="fa fa-dashboard" ng-show="row.JobRunStatus=='JOB_IN_PROGRESS'"> Running</i>
                                         <i tooltip="JOB_NOT_STARTED" id="statusNotStarted" class="fa fa-history" ng-show="row.JobRunStatus=='JOB_NOT_STARTED'"> Not Started</i>
                                     </td> -->
 
-                                    <td>
-                                        <small>{{ parseIsoDatetime(row.UpdatedTimeStamp) }}</small>
-                                    </td>
+                                <td>
+                                    <small>{{ parseIsoDatetime(row.UpdatedTimeStamp) }}</small>
+                                </td>
 
-                                    <!--
+                                <!--
                                     <td>
                                          <div class="btn-group" role="group" id="editSubmitBtnGrp">
 
@@ -196,20 +208,50 @@
                                         </button> 
                                     </td>-->
 
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="10" class="text-center">
-                                        <div st-pagination="" st-items-by-page="15" st-displayed-pages="15"></div>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="10" class="text-center">
+                                    <div st-pagination="" st-items-by-page="15" st-displayed-pages="15"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
 
+                </div>
+                
+                <div role="tabpanel" class="tab-pane" id="rides">
+                    <br>
+                    <div class ="col-lg-offset-1 col-lg-4">
+                    <table id="ridesTable" st-table="displayedCollection" st-safe-src="AvailableRides" class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th st-sort="RideTypeSelected" align="center" class="text-center">
+                                    <a tooltip="Click to sort by RideTypeSelected">Available Ride Types</a>
+                                </th>
+                            </tr>
+                        </thead>
 
+                        <tbody>
+                            <tr ng-repeat="row in displayedCollection">
+                                    <td class="text-center"><small>{{row.RideTypeSelected}}<small></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2" class="text-center">
+                                    <div st-pagination="" st-items-by-page="15" st-displayed-pages="15"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
 
-        <!--         <pre> {{newBooking}} </pre> -->
+                </div>
+            </div>
+
+        </div>
 
     </div>
     <!-- /container -->
@@ -226,11 +268,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
 
-    <script src="/scripts/vendor/bootstrap-formhelpers.js"></script>
-
     <script src="/scripts/vendor/smart-table.min.js"></script>
     <script src="/scripts/vendor/bootbox.min.js"></script>
-    <script src="/scripts/vendor/moment.min.js"></script> 
+    <script src="/scripts/vendor/moment.min.js"></script>
 
     <script src="/scripts/app.js"></script>
     <script src="/scripts/services/kangarooAngularService.js"></script>
