@@ -175,13 +175,29 @@ exports.getAllReservationByConfirmationCode = function(req, res) {
 
 // Get Remaining Reservation Slots Of Day
 exports.getSoldOutReservationSlotsOfDay = function(req, res) {
+    
     var rideDateSelected = req.params.RideDateSelected;
+    
     res.set('Access-Control-Allow-Origin', '*');
     callback = function(data) {
-        console.log(data)
-        res.send({
-            'data': data
-        });
+
+        var getSoldOutSlotsFunc = function(allowedRidesPerSlots){
+
+            var soldOutSlotList = []
+
+            for (i=0; i< data.length;i++){
+                if ((allowedRidesPerSlots - data[i].count ) < 1) { 
+                    soldOutSlotList.push(data[i]._id.RideTimeSelected);
+                }
+            }
+            console.log("soldOutSlotList " + soldOutSlotList.sort());
+            res.send({
+                'soldOutSlotList': soldOutSlotList.sort()
+            });
+
+        }
+
+        getAllowedRidesPerSlotInfo(getSoldOutSlotsFunc);
     }
     getAllBookedReservationSlotsOfDayCount(rideDateSelected, callback);
     //    getAllowedRidesPerSlotInfo(callback);
@@ -316,12 +332,12 @@ exports.bookNewReservation = function(req, res) {
                     UpdatedTimeStamp: new Date()
                 }, function(err, adHocQuery) {
                     if (err) {
-                        return sendError(err);
-                        /*log.error('ConfirmationCode - %s Error creating new Reservation: %s', confirmationCode, JSON.stringify({
-                            error: err
-                        }));
-                        res.status(500)
-                        return res.send(err)*/
+                        if (err.message.includes("duplicate key error")){
+                            return sendError("Duplicate Registration not allowed");
+                        }
+                        else{
+                            return sendError(err.message);
+                        }
                     } else {
                         log.info(' ConfirmationCode - %s New Reservation Submitted: %s', confirmationCode, JSON.stringify({
                             clientIPaddress: clientIPaddress,
@@ -360,9 +376,6 @@ exports.bookNewReservation = function(req, res) {
         }
 
         isBookingSlotFreeForSpecificDateTime(rideDateSelected, rideTimeSelected, callback);
-
-
-
 
     }
 
