@@ -76,14 +76,11 @@ var isBookingSlotFreeForSpecificDateTime = function(reservationDay, reservationT
 
 
     var callback = function(allowedRidesPerSlot) {
-        console.log("asdfasf" + reservationDay + reservationTime);
-
+       
         Reservations.count({
             "RideDateSelected": reservationDay,
             "RideTimeSelected": reservationTime
         }, function(err, count) {
-            console.log("count")
-            console.log(count)
             if (err) {
                 log.error(' Error retrieving Existing Reservations of the day %s %s: %s', reservationDay, reservationTime, JSON.stringify({
                     error: err

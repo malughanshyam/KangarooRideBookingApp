@@ -9,6 +9,12 @@ kangarooRideApp.controller('adminCtrl', function($scope, $compile, $http, kangar
     $scope.displayedReservationsCollection = [];
     $scope.displayedRidesCollection = [];
     $scope.ridesPerSlot;
+    
+    $scope.showAddRideForm = false;
+    $scope.newRide = {};
+    $scope.newRide.rideName;
+
+
     // Function to convert the ISO Datestring to Readable Format for displaying in the Recent Jobs Table
     $scope.parseIsoDatetime = function(dateStr) {
         return kangarooAngularService.parseIsoDatetime(dateStr);
@@ -50,6 +56,20 @@ kangarooRideApp.controller('adminCtrl', function($scope, $compile, $http, kangar
                 $scope.jobLog = 'Fetching Reservations Failed :' + err;
             });
     }
+
+    $scope.addNewRide = function(){
+        $http.post('/addNewRide', $scope.newRide)
+            .success(function(data) {
+                $scope.allAvailableRides = data.availableRides;
+                $scope.displayedRidesCollection = [].concat($scope.allAvailableRides);
+                $scope.newRide.rideName = '';
+                $scope.showAddRideForm = false;
+            })
+            .error(function(err) {
+                console.log(err);
+            });
+    }
+
 
     $scope.populateReservationsTable();
     $scope.populateRidesTableAndAllowedSlotsInfo();

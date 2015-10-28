@@ -78,7 +78,7 @@
                             <tr>
                                 <!-- <th st-sort="JobID">JobID</th> -->
                                 <th st-sort="ConfirmationCode" style="white-space: nowrap">
-                                    <a tooltip="Click to sort by ConfirmationCode">ConfirmationCode</a>
+                                    <a tooltip="Click to sort by ConfirmationCode">Confirmation Code</a>
                                 </th>
 
                                 <th st-sort="Email">
@@ -230,24 +230,41 @@
                         <table id="ridesTable" st-table="displayedRidesCollection" st-safe-src="AvailableRides" class="table table-responsive">
                             <thead>
                                 <tr>
-                                    <th st-sort="RideTypeSelected" align="center" class="text-center">
+                                    <th st-sort="RideTypeSelected">
                                         <a tooltip="Click to sort by RideTypeSelected">Available Ride Types</a>
+                                    </th>
+                                    <th>
+                                        <div class="pull-right">
+                                            <button type="button" align="right" ng-click="showAddRideForm = !showAddRideForm" class="btn btn-xs btn-success" tooltip="Add Ride">
+                                                <i class="fa fa-plus-square-o"></i></span> 
+                                            </button>
+                                        </div>
                                     </th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 <tr ng-repeat="row in displayedRidesCollection">
-                                    <td class="text-center"><small>{{row}}<small></td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="1" class="text-center">
-                                    <div st-pagination="" st-items-by-page="15" st-displayed-pages="10"></div>
-                                </td>
-                            </tr>
-                        </tfoot>
+                                    <td colspan=2 class="text-center">{{row}}</td>
+                                </tr>
+                                <tr ng-show="showAddRideForm">
+                                    <td colspan=2 class="text-center"> 
+                                        <form class="form-inline" name="addRideForm" ng-submit="addNewRide()">
+                                          <div class="form-group" >
+                                            <input type="text" class="form-control" name="newRide" id="newRide" placeholder="Ride Name" ng-model="newRide.rideName" required title="Enter a valid Ride">
+                                          </div>
+                                          <button type="submit" class="btn btn-sm btn-primary" >Add Ride</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2" class="text-center">
+                                        <div st-pagination="" st-items-by-page="15" st-displayed-pages="10"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
 

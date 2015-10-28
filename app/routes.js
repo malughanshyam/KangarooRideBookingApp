@@ -11,7 +11,7 @@ module.exports = function(app) {
     var ReservationHandler = require('./controllers/ReservationHandler');
 
     // Import AdHocJob Controllers / Route Handlers
-    var RidesManager = require('./controllers/RidesManagerHandler');
+    var RideManager = require('./controllers/RideManagerHandler');
 
     // Get All Reservations
     app.get('/reservations', ReservationHandler.getAllReservations);
@@ -32,9 +32,12 @@ module.exports = function(app) {
     app.get('/existingReservations/:RideDateSelected/:RideTimeSelected', ReservationHandler.getExistingReservationsSlotCount);
 
     // Get All Rides
-    app.get('/allRidesAndAllowedSlotsInfo', RidesManager.getAllRidesAndAllowedSlotsInfo);
-    
+    app.get('/allRidesAndAllowedSlotsInfo', RideManager.getAllRidesAndAllowedSlotsInfo);
 
+    // Add new ride
+    app.post('/addNewRide', RideManager.addNewRide);
+    
+    
     // Default Route
     app.get('/', function (req, res) {
         res.sendFile(HOME_PAGE, { root: __dirname + '/../public/'}); 

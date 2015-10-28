@@ -18,6 +18,14 @@ table > thead a {
   color: #00FFFF;
 }
 
+table th {
+    color: #fff;
+    font-family: "Segoe UI Light","Helvetica Neue","Segoe UI","Segoe WP",sans-serif;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+}
 label {
     color: #fff;
     font-family: "Segoe UI Light","Helvetica Neue","Segoe UI","Segoe WP",sans-serif;
