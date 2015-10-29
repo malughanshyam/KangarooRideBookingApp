@@ -24,23 +24,23 @@ body {
 }
 
 
-
-/*.fullscreen_bg {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-size: cover;
-    background-position: 50% 50%;
-    background-image: url('../../img/color-splash.jpg');
-    background-repeat:repeat;
+body label{
+    color: #fff;
 }
-*/
 
+body label{
+    color: #fff;
+    font-family: "Segoe UI Light","Helvetica Neue","Segoe UI","Segoe WP",sans-serif;
+    font-weight: 400;
+    line-height: 1.1;
+}
 
 .page-header, table > tbody{
   color: #fff;
+}
+
+#subHeading {
+ color: #F8F8F8;
 }
 
 table > thead a {
@@ -58,41 +58,18 @@ table th {
     line-height: 1.1;
 }
 
+#reservationDetailsTableId th {
+  white-space: nowrap;
 }
 
-body label{
-    color: #fff;
-}
-
-body label{
-    color: #fff;
-    font-family: "Segoe UI Light","Helvetica Neue","Segoe UI","Segoe WP",sans-serif;
-    font-weight: 400;
-    line-height: 1.1;
-}
-
-#subHeading {
- color: #F8F8F8;
-}
-
-
-nav {
-    font-family: "Segoe UI Light","Helvetica Neue","Segoe UI","Segoe WP",sans-serif;
-    font-weight: 100;
-    line-height: 1.1;
-}
-
-.nav > li > a{
- color: #00FF33;
-}
-
-.nav > li > a:hover, .nav > li > a:focus {
- color: #000033;
+.tab-pane > h2{
+  color: #CCFF33;
 }
 
 form {
     padding-top: 0.5em;
 }
+
 pre {
     white-space: pre-wrap;
     /* css-3 */
@@ -117,13 +94,7 @@ select, input{
 #newRidesPerSlot {
     width: 70px;
 }
-/*input.ng-invalid {
-  border: 1px solid red;
-}
-input.ng-valid {
-  border: 1px solid green;
-}
-*/
+
 .errorMsg {
     color: red;
 }
@@ -142,3 +113,29 @@ input.ng-valid {
     color: #FF6600;
 }
 
+.modal-content{
+  background-color: #6666CC;
+}
+
+
+nav {
+    font-family: "Segoe UI Light","Helvetica Neue","Segoe UI","Segoe WP",sans-serif;
+    font-weight: 100;
+    line-height: 1.1;
+}
+
+.nav > li > a{
+ color: #00FF33;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color:#333366;
+    border-bottom-color: #00FF00;
+    color: #00FF00;
+}
+
+.nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:focus {
+   background-color:#CC6600;
+   color: #CCFFCC;
+   border-bottom-color: #CCFFCC;
+}

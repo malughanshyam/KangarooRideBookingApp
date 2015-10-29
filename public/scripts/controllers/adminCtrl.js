@@ -94,21 +94,29 @@ kangarooRideApp.controller('adminCtrl', function($scope, $compile, $http, kangar
     }
 
     $scope.deleteReservation = function(reservation){
+
         if (!reservation.ConfirmationCode){
-            return;
-        } else{
-
-            var deleteReservationURL = '/deleteReservation/' + reservation.ConfirmationCode;
-
-            $http.delete(deleteReservationURL)
-                .success(function (data) {
-                    $scope.populateReservationsTable();
-                })
-                .error(function (err) {
-                    alert('Error deleting reservation: ' + err.error);
-                });
-
+                    return;
         }
+
+        bootbox.confirm("Are you sure you want to delete the Reservation with Confirmation Code (" + reservation.ConfirmationCode + ") ?", function(userResponse) {
+
+            if (userResponse == true) {
+                var deleteReservationURL = '/deleteReservation/' + reservation.ConfirmationCode;
+
+                    $http.delete(deleteReservationURL)
+                        .success(function (data) {
+                            $scope.populateReservationsTable();
+                        })
+                        .error(function (err) {
+                            alert('Error deleting reservation: ' + err.error);
+                    });
+
+                }
+
+            
+
+        });
 
     }
 

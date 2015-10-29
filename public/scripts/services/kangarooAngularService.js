@@ -3,7 +3,7 @@ angular.module('kangarooRideApp')
 
         var parseIsoDatetime = function(dtstr) {
             //return moment(dtstr).tz('America/New_York').format("ddd, MMMM D YYYY, hh:mm A z");
-            return moment(dtstr).utc().format("MMM D, YYYY");
+            return moment(dtstr).utc().format("ddd, MMM D YYYY, hh:mm A z");
         }
 
         return {

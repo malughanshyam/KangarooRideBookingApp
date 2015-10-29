@@ -59,6 +59,7 @@ kangarooRideApp.controller('reservationCtrl', function($scope, $compile, $http) 
             });
 	}
 
+
     //Reset the form
 	$scope.bookingReset = function(){
 		$scope.newBooking = {};
@@ -122,7 +123,6 @@ kangarooRideApp.controller('reservationCtrl', function($scope, $compile, $http) 
         $scope.newBooking.rideTimeSelected = reservation.RideTimeSelected;
         $scope.newBooking.specialNeeds  = reservation.SpecialNeeds;
     });
-
 
     $scope.populateAvailableRideTypes();
      

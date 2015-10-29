@@ -72,8 +72,8 @@
 
             <!-- Nav tabs -->
             <ul class="nav nav-tabs nav-justified" role="tablist">
-                <li role="presentation" class="active"><a href="#reservations" aria-controls="reservations" role="tab" data-toggle="tab" ng-click="populateReservationsTable()"><h2>Reservations</h2></a></li>
-                <li role="presentation"><a href="#rides" aria-controls="rides" role="tab" data-toggle="tab"><h2>Manage Rides</h2></a></li>
+                <li role="presentation" class="active"><a href="#reservations" aria-controls="reservations" role="tab" data-toggle="tab" ng-click="populateReservationsTable()"><h2> <i class="glyphicon glyphicon-calendar"></i> Reservations</h2></a></li>
+                <li role="presentation"><a href="#rides" aria-controls="rides" role="tab" data-toggle="tab"><h2> <i class="glyphicon glyphicon-edit"></i> Manage Rides</h2></a></li>
                 <li role="presentation" ng-hide="true"><a href="#viewReservation" aria-controls="viewReservation" role="tab" data-toggle="tab"><h2>View Reservation</h2></a></li>
                 <li role="presentation" ng-hide="true"><a href="#editReservation" aria-controls="editReservation" role="tab" data-toggle="tab"><h2>Edit Reservation</h2></a></li>
             </ul>
@@ -158,14 +158,14 @@
  -->
                                 <td>
 
-                                    <button type="button" ng-click="viewReservation(row)" class="btn btn-success btn-xs" id="viewReservationBtn">
+                                    <button type="button" ng-click="viewReservation(row)" class="btn btn-success btn-xs" id="viewReservationBtn" tooltip="View Reservation">
                                         <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                                     </button>
 
-                                    <button type="button" ng-click="editReservation(row)" class="btn btn-primary btn-xs" id="editReservationBtn">
+                                    <button type="button" ng-click="editReservation(row)" class="btn btn-primary btn-xs" id="editReservationBtn" tooltip="Edit Reservation">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     </button>
-                                    <button type="button" ng-click="deleteReservation(row)" class="btn btn-danger btn-xs" id="deleteReservationBtn">
+                                    <button type="button" ng-click="deleteReservation(row)" class="btn btn-danger btn-xs" id="deleteReservationBtn" tooltip="Delete Reservation">
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                     </button>
 
@@ -266,12 +266,11 @@
                 <!-- View Reservation-->
                 <div role="tabpanel" class="tab-pane" id="viewReservation">
 
-
-
-
+                    <br>
                     <h2 class="text-center"> Reservation Details </h2>
+
                     <div class="col-lg-offset-1 col-sm-10 col-lg-10">
-                        <table class="table table-responsive">
+                        <table class="table table-responsive" id="reservationDetailsTableId">
                             <tbody>
                                 <tr>
                                     <th>Confirmation Code</th>
