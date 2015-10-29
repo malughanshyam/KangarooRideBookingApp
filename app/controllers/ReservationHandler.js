@@ -7,19 +7,11 @@ var mongoose = require('mongoose');
 var winston = require('winston');
 var log = winston.loggers.get('log');
 
-// Types of Log Levels
-// detailLogger.debug("Debug")
-// detailLogger.verbose("verbose")
-// detailLogger.info("info")
-// detailLogger.warn("warn")
-// detailLogger.error("error")
-
-
 // Include the MongoDB Schema 
 Reservations = require('../models/ReservationsSchema');
 RideManager = require('../models/RideManagerSchema');
 
-
+// Get the allowed rides per slot information
 var getAllowedRidesPerSlotInfo = function(callbackFunc) {
 
     var callback = function(err, data) {
@@ -39,8 +31,8 @@ var getAllowedRidesPerSlotInfo = function(callbackFunc) {
         .exec(callback);
 };
 
+// Get the count of booked reservations slots of the given day
 var getAllBookedReservationSlotsOfDayCount = function(reservationDay, callbackFunc) {
-    console.log("Var :" + reservationDay);
 
     var agg = [{
         $match: {
@@ -69,14 +61,13 @@ var getAllBookedReservationSlotsOfDayCount = function(reservationDay, callbackFu
         callbackFunc(data);
 
     });
-
 };
 
+// Check if there is any additional slot free during the given date and time
 var isBookingSlotFreeForSpecificDateTime = function(reservationDay, reservationTime, callbackFunc) {
 
-
     var callback = function(allowedRidesPerSlot) {
-       
+
         Reservations.count({
             "RideDateSelected": reservationDay,
             "RideTimeSelected": reservationTime
@@ -101,10 +92,7 @@ var isBookingSlotFreeForSpecificDateTime = function(reservationDay, reservationT
     }
 
     getAllowedRidesPerSlotInfo(callback)
-
-
 };
-
 
 // Get all the Reservations
 exports.getAllReservations = function(req, res) {
@@ -119,8 +107,8 @@ exports.getAllReservations = function(req, res) {
             }));
             res.status(500)
             return res.send({
-                    error:err.message
-                });
+                error: err.message
+            });
         } else {
             log.debug(' GET - Retrieved all Reservations');
             res.send(reservations);
@@ -134,7 +122,6 @@ exports.getAllReservations = function(req, res) {
         .limit(100)
         .exec(callback);
 };
-
 
 // Get Reservation based on Confirmation Code
 exports.getAllReservationByConfirmationCode = function(req, res) {
@@ -168,30 +155,29 @@ exports.getAllReservationByConfirmationCode = function(req, res) {
             }));
             res.status(500)
             return res.send({
-                    error:err.message
-                });
+                error: err.message
+            });
         }
     });
 };
 
 // Get Remaining Reservation Slots Of Day
 exports.getSoldOutReservationSlotsOfDay = function(req, res) {
-    
+
     var rideDateSelected = req.params.RideDateSelected;
-    
+
     res.set('Access-Control-Allow-Origin', '*');
     callback = function(data) {
 
-        var getSoldOutSlotsFunc = function(allowedRidesPerSlots){
+        var getSoldOutSlotsFunc = function(allowedRidesPerSlots) {
 
             var soldOutSlotList = []
 
-            for (i=0; i< data.length;i++){
-                if ((allowedRidesPerSlots - data[i].count ) < 1) { 
+            for (i = 0; i < data.length; i++) {
+                if ((allowedRidesPerSlots - data[i].count) < 1) {
                     soldOutSlotList.push(data[i]._id.RideTimeSelected);
                 }
             }
-            console.log("soldOutSlotList " + soldOutSlotList.sort());
             res.send({
                 'soldOutSlotList': soldOutSlotList.sort()
             });
@@ -201,48 +187,7 @@ exports.getSoldOutReservationSlotsOfDay = function(req, res) {
         getAllowedRidesPerSlotInfo(getSoldOutSlotsFunc);
     }
     getAllBookedReservationSlotsOfDayCount(rideDateSelected, callback);
-    //    getAllowedRidesPerSlotInfo(callback);
-
 };
-
-
-exports.getExistingReservationsSlotCount = function(req, res) {
-
-    var clientIPaddress = req.ip || req.header('x-forwarded-for') || req.connection.remoteAddress;
-    var rideDateSelected = req.body.rideDateSelected;
-
-    var agg = [{
-        $group: {
-            _id: {
-                'RideDateSelected': '$RideDateSelected',
-                'RideTimeSelected': '$RideTimeSelected'
-            },
-            count: {
-                $sum: 1
-            }
-        }
-    }];
-
-    Reservations.aggregate(agg, function(err, data) {
-        if (err) {
-            log.error('GET - Error retrieving Existing Reservations Count: %s', JSON.stringify({
-                clientIPaddress: clientIPaddress,
-                error: err
-            }));
-            res.status(500);
-            return res.send({
-                    error:err.message
-                });
-        }
-        log.debug(' GET - Retrieved all Rides');
-        res.send({
-            RideTimeSelected: data[0]._id.RideTimeSelected,
-            count: data[0].count
-        });
-    });
-
-};
-
 
 // Book new Reservation
 exports.bookOrUpdateReservation = function(req, res) {
@@ -271,6 +216,7 @@ exports.bookOrUpdateReservation = function(req, res) {
         });
     }
 
+    // Backend Validation
     if (!email) {
         return sendError("Email invalid. Please correct and resubmit");
     }
@@ -311,11 +257,12 @@ exports.bookOrUpdateReservation = function(req, res) {
 
             if (isBookingSlotFreeForSpecificDateTimeFlag == true) {
 
-                // Create a new Job ID     
+                // Create a new Confirmation Code using new Mongo Object
                 var ObjectId = mongoose.Types.ObjectId;
                 confirmationCode = new ObjectId;
 
-                confirmationCode = confirmationCode.toString().toUpperCase();
+                // Convert to String format
+                confirmationCode = confirmationCode.toString().toUpperCase().slice(-7);
 
                 // Create a MongoDB record for the AdHoc Job
                 Reservations.create({
@@ -334,10 +281,9 @@ exports.bookOrUpdateReservation = function(req, res) {
                     UpdatedTimeStamp: new Date()
                 }, function(err, adHocQuery) {
                     if (err) {
-                        if (err.message.includes("duplicate key error")){
-                            return sendError("Duplicate Registration with same Email, First and Last Name not allowed");
-                        }
-                        else{
+                        if (err.message.includes("duplicate key error")) {
+                            return sendError("Duplicate Registration!  Email, First and Last Name already registered.");
+                        } else {
                             return sendError(err.message);
                         }
                     } else {
@@ -379,53 +325,55 @@ exports.bookOrUpdateReservation = function(req, res) {
 
         isBookingSlotFreeForSpecificDateTime(rideDateSelected, rideTimeSelected, callback);
 
-    } else{
+    } else {
         // Confirmation Code Present - Update Existing Reservation
 
-
         // Add a ride
-        var query = {'ConfirmationCode': confirmationCode};
+        var query = {
+            'ConfirmationCode': confirmationCode
+        };
         var updateFields = {
             $set: {
-                    Email: email,
-                    FirstName: firstName,
-                    LastName: lastName,
-                    PhoneNumber: phoneNumber,
-                    RideTypeSelected: rideTypeSelected,
-                    RideDateSelected: rideDateSelected,
-                    RideTimeSelected: rideTimeSelected,
-                    SpecialNeeds: specialNeeds,
-                    SubmittedByIP: clientIPaddress,
-                },
-            $currentDate: { "UpdatedTimeStamp": true } 
+                Email: email,
+                FirstName: firstName,
+                LastName: lastName,
+                PhoneNumber: phoneNumber,
+                RideTypeSelected: rideTypeSelected,
+                RideDateSelected: rideDateSelected,
+                RideTimeSelected: rideTimeSelected,
+                SpecialNeeds: specialNeeds,
+                SubmittedByIP: clientIPaddress,
+            },
+            $currentDate: {
+                "UpdatedTimeStamp": true
+            }
         };
 
         function callback(err) {
             if (err) {
-                        if (err.message.includes("duplicate key error")){
-                            return sendError("Duplicate Registration with same Email, First and Last Name not allowed");
-                        }
-                        else{
-                            return sendError(err.message);
-                        }
+                if (err.message.includes("duplicate key error")) {
+                    return sendError("Duplicate Registration with same Email, First and Last Name not allowed");
+                } else {
+                    return sendError(err.message);
+                }
             } else {
 
                 log.info(' ConfirmationCode - %s Reservation Updated: %s', confirmationCode, JSON.stringify({
-                            clientIPaddress: clientIPaddress,
-                            email: email,
-                            firstName: firstName,
-                            lastName: lastName,
-                            phoneNumber: phoneNumber,
-                            rideTypeSelected: rideTypeSelected,
-                            rideDateSelected: rideDateSelected,
-                            rideTimeSelected: rideTimeSelected,
-                            specialNeeds: specialNeeds,
-                            confirmationCode: confirmationCode
-                        }));
+                    clientIPaddress: clientIPaddress,
+                    email: email,
+                    firstName: firstName,
+                    lastName: lastName,
+                    phoneNumber: phoneNumber,
+                    rideTypeSelected: rideTypeSelected,
+                    rideDateSelected: rideDateSelected,
+                    rideTimeSelected: rideTimeSelected,
+                    specialNeeds: specialNeeds,
+                    confirmationCode: confirmationCode
+                }));
 
                 res.send({
-                            msg: "Reservation (ConfirmationCode : " + confirmationCode + ") updated in database"
-                        });    
+                    msg: "Reservation (ConfirmationCode : " + confirmationCode + ") updated in database"
+                });
 
             }
         }
@@ -433,46 +381,45 @@ exports.bookOrUpdateReservation = function(req, res) {
         Reservations.findOneAndUpdate(query, updateFields, callback)
 
     }
-
-
 };
 
 // Delete a reservation
-exports.deleteReservation = function(req,res) {
+exports.deleteReservation = function(req, res) {
 
-        res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Origin', '*');
 
-        var clientIPaddress = req.ip || req.header('x-forwarded-for') || req.connection.remoteAddress;
-        var confirmationCode = req.params.ConfirmationCode
-    
-        var sendError = function(msg) {
-            log.error('Error deleting Reservation %s: %s', confirmationCode, JSON.stringify({
-                error: msg
-            }));
-            res.status(500);
+    var clientIPaddress = req.ip || req.header('x-forwarded-for') || req.connection.remoteAddress;
+    var confirmationCode = req.params.ConfirmationCode
+
+    var sendError = function(msg) {
+        log.error('Error deleting Reservation %s: %s', confirmationCode, JSON.stringify({
+            error: msg
+        }));
+        res.status(500);
+        res.send({
+            error: msg
+        });
+    }
+
+    if (!confirmationCode) {
+        return sendError("Invalid ConfirmationCode");
+    }
+
+    function callback(err, doc, result) {
+        if (err) {
+            return sendError(err.message);
+        } else if (!doc) {
+            return sendError("Confirmation code not found in database");
+        } else {
+            log.info('Reservation (ConfirmationCode : %s) deleted from database', confirmationCode);
             res.send({
-                error: msg
+                msg: "Reservation (ConfirmationCode : " + confirmationCode + ") deleted from database"
             });
         }
+    };
 
-        if (!confirmationCode){
-            return sendError("Invalid ConfirmationCode");
-        }
 
-        function callback(err, doc, result) {
-            if (err) {
-                 return sendError(err.message); 
-            } else if (!doc) {
-                return sendError("Confirmation code not found in database"); 
-            }else{
-                log.info('Reservation (ConfirmationCode : %s) deleted from database', confirmationCode);
-                res.send({
-                            msg: "Reservation (ConfirmationCode : " + confirmationCode + ") deleted from database"
-                        });                        
-            }
-        };
-
-        
-        Reservations.where({'ConfirmationCode': confirmationCode}).findOneAndRemove(callback)   // executes
-
+    Reservations.where({
+            'ConfirmationCode': confirmationCode
+        }).findOneAndRemove(callback) 
 }

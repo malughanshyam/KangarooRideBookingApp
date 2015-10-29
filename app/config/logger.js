@@ -11,7 +11,7 @@ winston.addColors({
 });
 
 //
-// Configure the logger for 'Detailed Logs'
+// Configure the logger
 //
 winston.loggers.add('log', {
     console: {
@@ -21,16 +21,12 @@ winston.loggers.add('log', {
     exitOnError: false,
     handleExceptions: true,
     json: false
-//    prettyPrint:true
   },
     file: {
         level: 'debug',
-        // colorize: true,
         filename: './logs/log.log',
         exitOnError: false,
         handleExceptions: true,
-        // prettyPrint:true,
-        // logstash: true,
         json: false
     }
 });

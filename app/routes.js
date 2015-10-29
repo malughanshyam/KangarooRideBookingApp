@@ -26,13 +26,7 @@ module.exports = function(app) {
     app.delete('/deleteReservation/:ConfirmationCode', ReservationHandler.deleteReservation);
 
     // Get a Existing Reservations Count
-    //app.get('/remainingReservationsSlotsOfDay/:RideDateSelected', ReservationHandler.getRemainingReservationsSlotsOfDay);
-
-    // Get a Existing Reservations Count
     app.get('/soldOutReservationSlotsOfDay/:RideDateSelected', ReservationHandler.getSoldOutReservationSlotsOfDay);
-
-    // Get a Existing Reservations Count
-    app.get('/existingReservations/:RideDateSelected/:RideTimeSelected', ReservationHandler.getExistingReservationsSlotCount);
 
     // Get All Rides
     app.get('/allRidesAndAllowedSlotsInfo', RideManager.getAllRidesAndAllowedSlotsInfo);

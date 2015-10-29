@@ -1,0 +1,127 @@
+body {
+    /* Location of the image */
+    
+    background-image: url('../../img/color-splash.jpg');
+    /* Background image is centered vertically and horizontally at all times */
+    
+    background-position: center center;
+    /* Background image doesn't tile */
+    
+    background-repeat: no-repeat;
+    /* Background image is fixed in the viewport so that it doesn't move when 
+     the content's height is greater than the image's height */
+    
+    background-attachment: fixed;
+    /* This is what makes the background image rescale based
+     on the container's size */
+    
+    background-size: cover;
+    /* Set a background color that will be displayed
+     while the background image is loading */
+    
+    background-color: #464646;
+    color: #fff;
+}
+body label {
+    color: #fff;
+}
+body label {
+    color: #fff;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    font-weight: 400;
+    line-height: 1.1;
+}
+.page-header,
+table > tbody {
+    color: #fff;
+}
+#subHeading {
+    color: #F8F8F8;
+}
+table > thead a {
+    color: #00FFFF;
+}
+table > thead a:hover,
+table > thead a:focus {
+    color: #CCFFFF;
+}
+table:not(.ui-datepicker-calendar) th {
+    color: #00FFFF;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    font-weight: 400;
+    line-height: 1.1;
+}
+#reservationDetailsTableId th {
+    white-space: nowrap;
+}
+.tab-pane > h2 {
+    color: #CCFF33;
+}
+form {
+    padding-top: 0.5em;
+}
+pre {
+    white-space: pre-wrap;
+    /* css-3 */
+    
+    white-space: -moz-pre-wrap !important;
+    /* Mozilla, since 1999 */
+    
+    white-space: -pre-wrap;
+    /* Opera 4-6 */
+    
+    white-space: -o-pre-wrap;
+    /* Opera 7 */
+    
+    word-wrap: break-word;
+    /* Internet Explorer 5.5+ */
+}
+select,
+input {
+    height: 30px;
+}
+#newRidesPerSlot {
+    width: 70px;
+}
+.errorMsg {
+    color: red;
+}
+#bookingStatusPlaceholderDiv {
+    padding-top: 2em;
+    padding-bottom: 2em;
+    color: #FFCC00;
+}
+#bookingStatusPlaceholderDiv #success {
+    color: #99FF00;
+}
+#bookingStatusPlaceholderDiv #failed,
+#failedConfCode {
+    color: #FF6600;
+}
+.modal-content {
+    background-color: #6666CC;
+}
+nav {
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    font-weight: 100;
+    line-height: 1.1;
+}
+.nav > li > a {
+    color: #00FF33;
+}
+.nav > li > a:hover,
+.nav > li > a:focus {
+    background-color: #333366;
+    border-bottom-color: #00FF00;
+    color: #00FF00;
+}
+.nav-tabs.nav-justified > .active > a,
+.nav-tabs.nav-justified > .active > a:hover,
+.nav-tabs.nav-justified > .active > a:focus {
+    background-color: #CC6600;
+    color: #CCFFCC;
+    border-bottom-color: #CCFFCC;
+}
+#homeLink {
+    color: #00FFFF;
+}
