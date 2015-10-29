@@ -46,6 +46,7 @@ kangarooRideApp.controller('reservationCtrl', function($scope, $compile, $http) 
         $http.post('/bookOrUpdateReservation', $scope.newBooking)
             .success(function(data) {
                 $scope.showFixErrorsButton=false;
+                $scope.newBookingStatus = 'SUCCESS'
                 $scope.newBooking.confirmationCode = data.confirmationCode;
                 $('#bookingStatusPlaceholderDiv').html('<h3 align="center" id="success"> <i  class="fa fa-check-square-o fa-3x "></i> <br>Booking Successful </h3>');
             })
