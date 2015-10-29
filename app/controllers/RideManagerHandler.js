@@ -1,6 +1,5 @@
 // Handler functions for the Rides Manager Module
 // Load the Modules
-
 var path = require('path');
 var mongoose = require('mongoose');
 
@@ -10,6 +9,38 @@ var log = winston.loggers.get('log');
 
 // Include the MongoDB Schema 
 RideManager = require('../models/RideManagerSchema');
+
+
+var initializeRideManagerInDatabase = function() {
+    RideManager.count({
+        _id: '1'
+    }, function(err, count) {
+        // Ride Manager Already initialized, Nothing extra to do
+        if (count != 0) {
+            return;
+        } else {
+            // Initialize
+            RideManager.create({
+                _id: '1',
+                allowedRidesPerSlot: 1,
+                availableRides: [],
+                CreatedTimeStamp: new Date(),
+                UpdatedTimeStamp: new Date()
+            }, function(err, adHocQuery) {
+                if (err) {
+                    log.error('Error initializing RideManager Schema in Database: %s', JSON.stringify({
+                        error: err
+                    }));
+                } else {
+                    log.info('Initialized Ride Manager Schema in DB');
+                }
+                return;
+            });
+        }
+    });
+}
+
+initializeRideManagerInDatabase();
 
 // Get all the Reservations
 exports.getAllRidesAndAllowedSlotsInfo = function(req, res) {
@@ -24,8 +55,8 @@ exports.getAllRidesAndAllowedSlotsInfo = function(req, res) {
             }));
             res.status(500);
             return res.send({
-                    error:err.message
-                });
+                error: err.message
+            });
         } else {
             log.debug(' GET - AllRidesAndAllowedSlotsInfo');
             res.send(data);
@@ -38,7 +69,7 @@ exports.getAllRidesAndAllowedSlotsInfo = function(req, res) {
         .exec(callback);
 }
 
-exports.addNewRide = function(req,res){
+exports.addNewRide = function(req, res) {
 
     res.set('Access-Control-Allow-Origin', '*');
 
@@ -55,31 +86,35 @@ exports.addNewRide = function(req,res){
         });
     }
 
-    if (!newRide){
+    if (!newRide) {
         return sendError("Ride invalid. Please correct and resubmit");
-    } else{
+    } else {
 
         // Add a ride
         var query = {};
         var updateFields = {
-            $push: { "availableRides": newRide },
-            $currentDate: { "UpdatedTimeStamp": true } 
+            $push: {
+                "availableRides": newRide
+            },
+            $currentDate: {
+                "UpdatedTimeStamp": true
+            }
         };
 
         function callback(err) {
             if (err) {
-                 return sendError(err.message ); 
-                 log.error('Error adding new Ride :%s', JSON.stringify({
+                return sendError(err.message);
+                log.error('Error adding new Ride :%s', JSON.stringify({
                     error: err
                 }));
             } else {
                 log.info('New Ride - "%s" added to the database', newRide);
-                
+
                 RideManager.findOne(function(err, data) {
-                    if (err){
-                            return sendError(err.message ); 
+                    if (err) {
+                        return sendError(err.message);
                     } else {
-                        res.send(data);                        
+                        res.send(data);
                     }
                 });
 
@@ -91,7 +126,7 @@ exports.addNewRide = function(req,res){
     }
 }
 
-exports.changeRidesPerSlot = function(req,res){
+exports.changeRidesPerSlot = function(req, res) {
 
     res.set('Access-Control-Allow-Origin', '*');
 
@@ -108,31 +143,35 @@ exports.changeRidesPerSlot = function(req,res){
         });
     }
 
-    if (!newRidesPerSlotValue){
+    if (!newRidesPerSlotValue) {
         return sendError("newRidesPerSlotValue invalid. Please correct and resubmit");
-    } else{
+    } else {
 
-        // Add a ride
+        // Update new allowed rides per slot value
         var query = {};
         var updateFields = {
-            $set: { "allowedRidesPerSlot": newRidesPerSlotValue },
-            $currentDate: { "UpdatedTimeStamp": true } 
+            $set: {
+                "allowedRidesPerSlot": newRidesPerSlotValue
+            },
+            $currentDate: {
+                "UpdatedTimeStamp": true
+            }
         };
 
         function callback(err) {
             if (err) {
-                 return sendError(err.message); 
-                 log.error('Error updating allowedRidesPerSlot :%s', JSON.stringify({
+                return sendError(err.message);
+                log.error('Error updating allowedRidesPerSlot :%s', JSON.stringify({
                     error: err
                 }));
             } else {
                 log.info('New allowedRidesPerSlot value- "%s" added to the database', newRidesPerSlotValue);
-                
+
                 RideManager.findOne(function(err, data) {
-                    if (err){
+                    if (err) {
                         return sendError(err.message);
                     } else {
-                        res.send(data);                        
+                        res.send(data);
                     }
                 });
 
