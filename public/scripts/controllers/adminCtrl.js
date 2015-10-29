@@ -87,6 +87,26 @@ kangarooRideApp.controller('adminCtrl', function($scope, $compile, $http, kangar
             });
     }
 
+    $scope.deleteReservation = function(reservation){
+        if (!reservation.ConfirmationCode){
+            return;
+        } else{
+
+            var deleteReservationURL = '/deleteReservation/' + reservation.ConfirmationCode;
+
+            $http.delete(deleteReservationURL)
+                .success(function (data) {
+                    $scope.populateReservationsTable();
+                })
+                .error(function (err) {
+                    alert('Error deleting reservation: ' + err.error);
+                });
+
+        }
+
+    }
+
+
     $scope.populateReservationsTable();
     $scope.populateRidesTableAndAllowedSlotsInfo();
 

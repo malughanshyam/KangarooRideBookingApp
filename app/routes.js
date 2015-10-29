@@ -22,6 +22,9 @@ module.exports = function(app) {
     // Book new Reservation Job
     app.post('/bookNewReservation', ReservationHandler.bookNewReservation);
 
+    // Delete a reservation
+    app.delete('/deleteReservation/:ConfirmationCode', ReservationHandler.deleteReservation);
+
     // Get a Existing Reservations Count
     //app.get('/remainingReservationsSlotsOfDay/:RideDateSelected', ReservationHandler.getRemainingReservationsSlotsOfDay);
 

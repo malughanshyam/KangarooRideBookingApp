@@ -23,9 +23,9 @@ exports.getAllRidesAndAllowedSlotsInfo = function(req, res) {
                 error: err
             }));
             res.status(500);
-            return res.send(JSON.stringify({
+            return res.send({
                     error:err.message
-                }));
+                });
         } else {
             log.debug(' GET - AllRidesAndAllowedSlotsInfo');
             res.send(data);
@@ -50,9 +50,9 @@ exports.addNewRide = function(req,res){
             error: msg
         }));
         res.status(500)
-        res.send(JSON.stringify({
+        res.send({
             error: msg
-        }));
+        });
     }
 
     if (!newRide){
@@ -68,7 +68,7 @@ exports.addNewRide = function(req,res){
 
         function callback(err) {
             if (err) {
-                 return sendError("Error adding new Ride :" + err.message ); 
+                 return sendError(err.message ); 
                  log.error('Error adding new Ride :%s', JSON.stringify({
                     error: err
                 }));
@@ -77,9 +77,7 @@ exports.addNewRide = function(req,res){
                 
                 RideManager.findOne(function(err, data) {
                     if (err){
-                            return res.send(JSON.stringify({
-                                    error:err.message
-                                    }));
+                            return sendError(err.message ); 
                     } else {
                         res.send(data);                        
                     }
@@ -105,9 +103,9 @@ exports.changeRidesPerSlot = function(req,res){
             error: msg
         }));
         res.status(500)
-        res.send(JSON.stringify({
+        res.send({
             error: msg
-        }));
+        });
     }
 
     if (!newRidesPerSlotValue){
@@ -123,7 +121,7 @@ exports.changeRidesPerSlot = function(req,res){
 
         function callback(err) {
             if (err) {
-                 return sendError("Error updating allowedRidesPerSlot :" + err.message ); 
+                 return sendError(err.message); 
                  log.error('Error updating allowedRidesPerSlot :%s', JSON.stringify({
                     error: err
                 }));
@@ -132,9 +130,7 @@ exports.changeRidesPerSlot = function(req,res){
                 
                 RideManager.findOne(function(err, data) {
                     if (err){
-                        return res.send(JSON.stringify({
-                                error:err.message
-                                }));
+                        return sendError(err.message);
                     } else {
                         res.send(data);                        
                     }

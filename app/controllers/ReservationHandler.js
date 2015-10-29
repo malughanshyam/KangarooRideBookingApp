@@ -37,7 +37,7 @@ var getAllowedRidesPerSlotInfo = function(callbackFunc) {
     RideManager
         .findOne()
         .exec(callback);
-}
+};
 
 var getAllBookedReservationSlotsOfDayCount = function(reservationDay, callbackFunc) {
     console.log("Var :" + reservationDay);
@@ -70,7 +70,7 @@ var getAllBookedReservationSlotsOfDayCount = function(reservationDay, callbackFu
 
     });
 
-}
+};
 
 var isBookingSlotFreeForSpecificDateTime = function(reservationDay, reservationTime, callbackFunc) {
 
@@ -103,7 +103,7 @@ var isBookingSlotFreeForSpecificDateTime = function(reservationDay, reservationT
     getAllowedRidesPerSlotInfo(callback)
 
 
-}
+};
 
 
 // Get all the Reservations
@@ -118,9 +118,9 @@ exports.getAllReservations = function(req, res) {
                 error: err
             }));
             res.status(500)
-            return res.send(JSON.stringify({
+            return res.send({
                     error:err.message
-                }));
+                });
         } else {
             log.debug(' GET - Retrieved all Reservations');
             res.send(reservations);
@@ -133,7 +133,7 @@ exports.getAllReservations = function(req, res) {
         .sort('-UpdatedTimeStamp')
         .limit(100)
         .exec(callback);
-}
+};
 
 
 // Get Reservation based on Confirmation Code
@@ -149,9 +149,9 @@ exports.getAllReservationByConfirmationCode = function(req, res) {
                     error: "ConfirmationCode not found"
                 }));
                 res.status(500)
-                return res.send(JSON.stringify({
+                return res.send({
                     error: "ConfirmationCode not found"
-                }));
+                });
 
             } else {
 
@@ -167,12 +167,12 @@ exports.getAllReservationByConfirmationCode = function(req, res) {
                 error: err
             }));
             res.status(500)
-            return res.send(JSON.stringify({
+            return res.send({
                     error:err.message
-                }));
+                });
         }
     });
-}
+};
 
 // Get Remaining Reservation Slots Of Day
 exports.getSoldOutReservationSlotsOfDay = function(req, res) {
@@ -203,7 +203,7 @@ exports.getSoldOutReservationSlotsOfDay = function(req, res) {
     getAllBookedReservationSlotsOfDayCount(rideDateSelected, callback);
     //    getAllowedRidesPerSlotInfo(callback);
 
-}
+};
 
 
 exports.getExistingReservationsSlotCount = function(req, res) {
@@ -230,9 +230,9 @@ exports.getExistingReservationsSlotCount = function(req, res) {
                 error: err
             }));
             res.status(500);
-            return res.send(JSON.stringify({
+            return res.send({
                     error:err.message
-                }));
+                });
         }
         log.debug(' GET - Retrieved all Rides');
         res.send({
@@ -241,7 +241,7 @@ exports.getExistingReservationsSlotCount = function(req, res) {
         });
     });
 
-}
+};
 
 
 // Book new Reservation
@@ -265,9 +265,9 @@ exports.bookNewReservation = function(req, res) {
             error: msg
         }));
         res.status(500)
-        res.send(JSON.stringify({
+        res.send({
             error: msg
-        }));
+        });
     }
 
     if (!email) {
@@ -382,3 +382,43 @@ exports.bookNewReservation = function(req, res) {
 
 
 };
+
+// Delete a reservation
+exports.deleteReservation = function(req,res) {
+
+        res.set('Access-Control-Allow-Origin', '*');
+
+        var clientIPaddress = req.ip || req.header('x-forwarded-for') || req.connection.remoteAddress;
+        var confirmationCode = req.params.ConfirmationCode
+    
+        var sendError = function(msg) {
+            log.error('Error deleting Reservation %s: %s', confirmationCode, JSON.stringify({
+                error: msg
+            }));
+            res.status(500);
+            res.send({
+                error: msg
+            });
+        }
+
+        if (!confirmationCode){
+            return sendError("Invalid ConfirmationCode");
+        }
+
+        function callback(err, doc, result) {
+            if (err) {
+                 return sendError(err.message); 
+            } else if (!doc) {
+                return sendError("Confirmation code not found in database"); 
+            }else{
+                log.info('Reservation (ConfirmationCode : %s) deleted from database', confirmationCode);
+                res.send({
+                            msg: "Reservation (ConfirmationCode : " + confirmationCode + ") deleted from database"
+                        });                        
+            }
+        };
+
+        
+        Reservations.where({'ConfirmationCode': confirmationCode}).findOneAndRemove(callback)   // executes
+
+}
