@@ -18,6 +18,10 @@ kangarooRideApp.controller('adminCtrl', function($scope, $compile, $http, kangar
     $scope.newRidesPerSlot = {};
     $scope.newRidesPerSlot.newRidesPerSlotValue= $scope.ridesPerSlot
 
+    // Activates a tab 
+    function activateTab(tab){
+        $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+    };
 
     // Function to convert the ISO Datestring to Readable Format for displaying in the Recent Jobs Table
     $scope.parseIsoDatetime = function(dateStr) {
@@ -106,6 +110,24 @@ kangarooRideApp.controller('adminCtrl', function($scope, $compile, $http, kangar
 
     }
 
+
+    $scope.editReservation = function(reservation){
+        // Broadcast an event with the adHocJob details
+        $rootScope.$broadcast('copyExistingReservationDetailsForEditing', reservation);
+        activateTab('newReservationTab');
+        activateTab('editReservation');
+    }
+
+    $scope.cancelEditAndGoBack = function(){
+        $scope.existingReservation = {};
+        activateTab('reservations');
+
+    }
+
+    $scope.activateExistingReservationsTab = function(){
+        $scope.populateReservationsTable();
+        $scope.cancelEditAndGoBack();
+    }
 
     $scope.populateReservationsTable();
     $scope.populateRidesTableAndAllowedSlotsInfo();

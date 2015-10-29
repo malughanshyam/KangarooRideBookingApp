@@ -245,9 +245,10 @@ exports.getExistingReservationsSlotCount = function(req, res) {
 
 
 // Book new Reservation
-exports.bookNewReservation = function(req, res) {
+exports.bookOrUpdateReservation = function(req, res) {
 
     // Initialize the Reservation Variables
+    var confirmationCode = req.body.ConfirmationCode; // Null if New Reservation
     var email = req.body.email;
     var firstName = req.body.firstName;
     var lastName = req.body.lastName;
@@ -302,8 +303,8 @@ exports.bookNewReservation = function(req, res) {
         sqlQuery = '';
     }
 
-    var confirmationCode = req.body.ConfirmationCode;
 
+    // Confirmation Code Undefined - Create New Reservation
     if (!confirmationCode) {
 
         callback = function(isBookingSlotFreeForSpecificDateTimeFlag) {
@@ -334,7 +335,7 @@ exports.bookNewReservation = function(req, res) {
                 }, function(err, adHocQuery) {
                     if (err) {
                         if (err.message.includes("duplicate key error")){
-                            return sendError("Duplicate Registration not allowed");
+                            return sendError("Duplicate Registration with same Email, First and Last Name not allowed");
                         }
                         else{
                             return sendError(err.message);
@@ -377,6 +378,59 @@ exports.bookNewReservation = function(req, res) {
         }
 
         isBookingSlotFreeForSpecificDateTime(rideDateSelected, rideTimeSelected, callback);
+
+    } else{
+        // Confirmation Code Present - Update Existing Reservation
+
+
+        // Add a ride
+        var query = {'ConfirmationCode': confirmationCode};
+        var updateFields = {
+            $set: {
+                    Email: email,
+                    FirstName: firstName,
+                    LastName: lastName,
+                    PhoneNumber: phoneNumber,
+                    RideTypeSelected: rideTypeSelected,
+                    RideDateSelected: rideDateSelected,
+                    RideTimeSelected: rideTimeSelected,
+                    SpecialNeeds: specialNeeds,
+                    SubmittedByIP: clientIPaddress,
+                },
+            $currentDate: { "UpdatedTimeStamp": true } 
+        };
+
+        function callback(err) {
+            if (err) {
+                        if (err.message.includes("duplicate key error")){
+                            return sendError("Duplicate Registration with same Email, First and Last Name not allowed");
+                        }
+                        else{
+                            return sendError(err.message);
+                        }
+            } else {
+
+                log.info(' ConfirmationCode - %s Reservation Updated: %s', confirmationCode, JSON.stringify({
+                            clientIPaddress: clientIPaddress,
+                            email: email,
+                            firstName: firstName,
+                            lastName: lastName,
+                            phoneNumber: phoneNumber,
+                            rideTypeSelected: rideTypeSelected,
+                            rideDateSelected: rideDateSelected,
+                            rideTimeSelected: rideTimeSelected,
+                            specialNeeds: specialNeeds,
+                            confirmationCode: confirmationCode
+                        }));
+
+                res.send({
+                            msg: "Reservation (ConfirmationCode : " + confirmationCode + ") updated in database"
+                        });    
+
+            }
+        }
+
+        Reservations.findOneAndUpdate(query, updateFields, callback)
 
     }
 

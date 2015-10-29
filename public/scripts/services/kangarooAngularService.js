@@ -7,7 +7,10 @@ angular.module('kangarooRideApp')
         }
 
         return {
-            parseIsoDatetime: parseIsoDatetime
+            parseIsoDatetime: parseIsoDatetime 
         };
+
+
+
 
     });

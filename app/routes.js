@@ -20,7 +20,7 @@ module.exports = function(app) {
     app.get('/reservationsByConfirmationCode/:ConfirmationCode', ReservationHandler.getAllReservationByConfirmationCode);
 
     // Book new Reservation Job
-    app.post('/bookNewReservation', ReservationHandler.bookNewReservation);
+    app.post('/bookOrUpdateReservation', ReservationHandler.bookOrUpdateReservation);
 
     // Delete a reservation
     app.delete('/deleteReservation/:ConfirmationCode', ReservationHandler.deleteReservation);

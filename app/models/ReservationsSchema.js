@@ -16,7 +16,7 @@ var schema = mongoose.Schema({
     CreatedTimeStamp: { type: Date, default:Date.now },
     UpdatedTimeStamp: { type: Date, default:Date.now }
 });
-
+schema.index({ ConfirmationCode: 1}, { unique: true });
 schema.index({ Email: 1, FirstName: 1, LastName: 1 }, { unique: true });
 schema.index({ RideDateSelected: 1, RideTimeSelected: 1});
 schema.index({ RideDateSelected: 1});

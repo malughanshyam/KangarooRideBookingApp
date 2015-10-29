@@ -19,6 +19,8 @@ body {
   /* Set a background color that will be displayed
      while the background image is loading */
   background-color: #464646;
+
+  color: #fff;
 }
 
 
@@ -45,8 +47,12 @@ table > thead a {
   color: #00FFFF;
 }
 
+table > thead a:hover, table > thead a:focus {
+  color: #CCFFFF;
+}
+
 table th {
-    color: #fff;
+    color: #00FFFF;
     font-family: "Segoe UI Light","Helvetica Neue","Segoe UI","Segoe WP",sans-serif;
     font-weight: 400;
     line-height: 1.1;
@@ -74,6 +80,14 @@ nav {
     font-family: "Segoe UI Light","Helvetica Neue","Segoe UI","Segoe WP",sans-serif;
     font-weight: 100;
     line-height: 1.1;
+}
+
+.nav > li > a{
+ color: #00FF33;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+ color: #000033;
 }
 
 form {

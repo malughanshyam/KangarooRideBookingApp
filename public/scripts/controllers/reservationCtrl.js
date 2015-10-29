@@ -1,7 +1,7 @@
 // ---------------------------------
 // Controller For Kangaroo Rides
 // ---------------------------------
-kangarooRideApp.controller('kangarooRideCtrl', function($scope, $compile, $http) {
+kangarooRideApp.controller('reservationCtrl', function($scope, $compile, $http) {
 
 	$scope.newBooking = {};
 	$scope.newBooking.email;
@@ -37,13 +37,13 @@ kangarooRideApp.controller('kangarooRideCtrl', function($scope, $compile, $http)
         activateTab('newReservationTab');
     }
 
-	$scope.bookReservation = function(){
+	$scope.bookOrUpdateReservation = function(){
 
         activateTab('statusTab');
 
         $('#bookingStatusPlaceholderDiv').html('<h3 align="center"> <i class="fa fa-spinner fa-pulse fa-3x "></i> <br><br> Booking your Ride ... </h3>');
 		
-        $http.post('/bookNewReservation', $scope.newBooking)
+        $http.post('/bookOrUpdateReservation', $scope.newBooking)
             .success(function(data) {
                 $scope.showFixErrorsButton=false;
                 $scope.newBooking.confirmationCode = data.confirmationCode;
@@ -109,6 +109,20 @@ kangarooRideApp.controller('kangarooRideCtrl', function($scope, $compile, $http)
             });
         
     }
+
+
+    $scope.$on('copyExistingReservationDetailsForEditing', function(event, reservation) {
+        $scope.newBooking.ConfirmationCode = reservation.ConfirmationCode;
+        $scope.newBooking.email = reservation.Email;
+        $scope.newBooking.firstName = reservation.FirstName;
+        $scope.newBooking.lastName = reservation.LastName;
+        $scope.newBooking.phoneNumber = reservation.PhoneNumber;
+        $scope.newBooking.rideTypeSelected = reservation.RideTypeSelected;
+        $scope.newBooking.rideDateSelected = reservation.RideDateSelected;
+        $scope.newBooking.rideTimeSelected = reservation.RideTimeSelected;
+        $scope.newBooking.specialNeeds  = reservation.SpecialNeeds;
+    });
+
 
     $scope.populateAvailableRideTypes();
      
