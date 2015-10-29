@@ -193,19 +193,65 @@
                 </div>
                 <div role="tabpanel" class="tab-pane" id="statusTab">
 
+                    <h2 class="text-center"> Reservation Status </h2>
                     <div id="bookingStatusPlaceholderDiv"></div>
 
-                    <div align="center">
-                        <button id='activateNewReservationTabBtn' type="button" ng-click="startNewBooking()" class="btn btn-success">
-                            <i class="fa fa-plus"></i> Book New Ride
-                        </button>
+                    <br>
+                    
+                    <div class="col-lg-offset-1 col-sm-10 col-lg-10">
+                        <table class="table table-responsive" id="reservationDetailsTableId">
+                            <tbody>
+                                <tr>
+                                    <th>Confirmation Code</th>
+                                    <td> <b>{{newBooking.confirmationCode}} <span id="failedConfCode" ng-show="newBookingStatus == 'FAILED'"> INVALID_REGISTRATION</span> </b></td>
 
-                        <button id='activateNewReservationTabBtn' type="button" ng-show="showFixErrorsButton" ng-click="fixBookingErrorsAndRebook()" class="btn btn-info">
-                            <i class="fa fa-magic"></i> Fix Errors and Rebook
-                        </button>
 
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td> {{ newBooking.firstName}} </td>
+                                </tr>
+                                <tr>
+                                    <th>First Name</th>
+                                    <td> {{ newBooking.lastName}} </td>
+                                </tr>
+                                <tr>
+                                    <th>Phone Number</th>
+                                    <td>{{ newBooking.phoneNumber}} </td>
+                                </tr>
+                                <tr>
+                                    <th>Ride Type</th>
+                                    <td>{{ newBooking.rideTypeSelected}} </td>
+                                </tr>
+
+                                <tr>
+                                    <th>Ride Date</th>
+                                    <td>{{ newBooking.rideDateSelected}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Ride Time</th>
+                                    <td>{{ newBooking.rideTimeSelected}} </td>
+                                </tr>
+                                <tr>
+                                    <th>Special Needs</th>
+                                    <td>{{ newBooking.specialNeeds}} </td>
+                                </tr>
+                                <tr>
+                                </tr>                                
+                            </tbody>
+                        </table>
+
+                        <div align="center">
+                            <button id='activateNewReservationTabBtn' type="button" ng-click="startNewBooking()" class="btn btn-success">
+                                <i class="fa fa-plus"></i> Book New Ride
+                            </button>
+
+                            <button id='activateNewReservationTabBtn' type="button" ng-show="showFixErrorsButton" ng-click="fixBookingErrorsAndRebook()" class="btn btn-info">
+                                <i class="fa fa-magic"></i> Fix Errors and Rebook
+                            </button>
+
+                        </div>
                     </div>
-
                 </div>
             </div>
 

@@ -50,12 +50,10 @@ kangarooRideApp.controller('reservationCtrl', function($scope, $compile, $http) 
                 $('#bookingStatusPlaceholderDiv').html('<h3 align="center" id="success"> <i  class="fa fa-check-square-o fa-3x "></i> <br>Booking Successful </h3>');
             })
             .error(function(err) {
-                console.log(err);
                 $scope.showFixErrorsButton=true;
-                $scope.newBooking.confirmationCode = err.error;
                 $scope.newBookingStatus = 'FAILED';
                 $('#bookingStatusPlaceholderDiv').html('<h3 align="center" id="failed"> <i  class="fa fa-exclamation-triangle fa-3x "></i> <br>Booking Failed </h3>');
-                $('#bookingStatusPlaceholderDiv').append('<div align="center"> <h3>Error</h3>' + err.error + '</div>') 
+                $('#bookingStatusPlaceholderDiv').append('<div align="center"> <h3> <b>Error : </b>' + err.error + '</h3></div>') 
             });
 	}
 
