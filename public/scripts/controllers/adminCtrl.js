@@ -18,6 +18,8 @@ kangarooRideApp.controller('adminCtrl', function($scope, $compile, $http, kangar
     $scope.newRidesPerSlot = {};
     $scope.newRidesPerSlot.newRidesPerSlotValue= $scope.ridesPerSlot
 
+    $scope.currReservation = {}
+
     // Activates a tab 
     function activateTab(tab){
         $('.nav-tabs a[href="#' + tab + '"]').tab('show');
@@ -108,6 +110,12 @@ kangarooRideApp.controller('adminCtrl', function($scope, $compile, $http, kangar
 
         }
 
+    }
+
+
+    $scope.viewReservation = function(reservation){
+        $scope.currReservation = reservation;
+        activateTab('viewReservation');
     }
 
 

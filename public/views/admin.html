@@ -74,6 +74,7 @@
             <ul class="nav nav-tabs nav-justified" role="tablist">
                 <li role="presentation" class="active"><a href="#reservations" aria-controls="reservations" role="tab" data-toggle="tab" ng-click="populateReservationsTable()"><h2>Reservations</h2></a></li>
                 <li role="presentation"><a href="#rides" aria-controls="rides" role="tab" data-toggle="tab"><h2>Manage Rides</h2></a></li>
+                <li role="presentation" ng-hide="true"><a href="#viewReservation" aria-controls="viewReservation" role="tab" data-toggle="tab"><h2>View Reservation</h2></a></li>
                 <li role="presentation" ng-hide="true"><a href="#editReservation" aria-controls="editReservation" role="tab" data-toggle="tab"><h2>Edit Reservation</h2></a></li>
             </ul>
 
@@ -95,14 +96,6 @@
                                     <a tooltip="Click to sort by Email">Email</a>
                                 </th>
 
-                                <th st-sort="FirstName" align="center">
-                                    <a tooltip="Click to sort by FirstName">First Name</a>
-                                </th>
-
-                                <th st-sort="FirstName" align="center">
-                                    <a tooltip="Click to sort by LastName">Last Name</a>
-                                </th>
-
                                 <th st-sort="PhoneNumber" align="center">
                                     <a tooltip="Click to sort by PhoneNumber">Phone No.</a>
                                 </th>
@@ -119,22 +112,15 @@
                                     <a tooltip="Click to sort by RideTimeSelected">Ride Time</a>
                                 </th>
 
-                                <th st-sort="SpecialNeeds" align="center">
+<!--                                 <th st-sort="SpecialNeeds" align="center">
                                     <a tooltip="Click to sort by SpecialNeeds">Special Needs</a>
                                 </th>
-
-                                <!--      <th st-sort="SubmittedByIP" align="center">
-                                        <a tooltip="Click to sort by SubmittedByIP">SubmittedByIP</a>
-                                    </th> -->
-
-                                <th st-sort="UpdatedTimeStamp" st-sort-default="reverse">
-                                    <a tooltip="Click to sort by TimeStamp">Last Modified</a>
-                                </th>
+ -->
                                 <th> </th>
 
                             </tr>
                             <tr>
-                                <th colspan="11">
+                                <th colspan="8">
                                     <div class="input-group col-xs-12">
                                         <span class="input-group-addon" id="basic-addon1"> 
                                                 <i class="fa fa-1x fa-search"></i>  
@@ -152,10 +138,6 @@
 
                                 <td><small>{{row.Email}}<small></td>
 
-                                <td><small>{{row.FirstName}}<small></td>
-
-                                <td><small>{{row.LastName}}<small></td>
-
                                 <td><small>{{row.PhoneNumber}}<small></td>
 
                                 <td><small>{{row.RideTypeSelected}}<small></td>
@@ -165,21 +147,25 @@
 
                                 <td><small>{{row.RideTimeSelected}}<small></td>
 
-                                <td>
+<!--                                 <td>
                                     <small>{{row.SpecialNeeds.substring(0, 20)}}</small>
                                     <a><small ng-show="showPopupFlag(row.SpecialNeeds,40)" popover="{{row.SpecialNeeds}}" popover-trigger="click"> ...<i class="fa fa-1x fa-eye"></i></small></a>
                                 </td>
-
-                                <td>
+ -->
+                                <!-- <td>
                                     <small>{{ parseIsoDatetime(row.UpdatedTimeStamp) }}</small>
                                 </td>
-
+ -->
                                 <td>
-                                    <button type="button" ng-click="editReservation(row)" class="btn btn-primary btn-xs" id="scheduleBtn">
+
+                                    <button type="button" ng-click="viewReservation(row)" class="btn btn-success btn-xs" id="viewReservationBtn">
+                                        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                    </button>
+
+                                    <button type="button" ng-click="editReservation(row)" class="btn btn-primary btn-xs" id="editReservationBtn">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     </button>
-                                    <br>
-                                    <button type="button" ng-click="deleteReservation(row)" class="btn btn-danger btn-xs" id="scheduleBtn">
+                                    <button type="button" ng-click="deleteReservation(row)" class="btn btn-danger btn-xs" id="deleteReservationBtn">
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                     </button>
 
@@ -189,7 +175,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="11" class="text-center">
+                                <td colspan="8" class="text-center">
                                     <div st-pagination="" st-items-by-page="15" st-displayed-pages="15"></div>
                                 </td>
                             </tr>
@@ -276,6 +262,81 @@
 
                 </div>
                 <!-- Edit Rides or Slots per Ride Tab Ends-->
+
+                <!-- View Reservation-->
+                <div role="tabpanel" class="tab-pane" id="viewReservation">
+
+
+
+
+                    <h2 class="text-center"> Reservation Details </h2>
+                    <div class="col-lg-offset-1 col-sm-10 col-lg-10">
+                        <table class="table table-responsive">
+                            <tbody>
+                                <tr>
+                                    <th>Confirmation Code</th>
+                                    <td> {{currReservation.ConfirmationCode}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td> {{ currReservation.Email}} </td>
+                                </tr>
+                                <tr>
+                                    <th>First Name</th>
+                                    <td> {{ currReservation.FirstName}} </td>
+                                </tr>
+                                <tr>
+                                    <th>Last Name</th>
+                                    <td>{{currReservation.LastName}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Phone Number</th>
+                                    <td>{{ currReservation.PhoneNumber}} </td>
+                                </tr>
+                                <tr>
+                                    <th>Ride Type</th>
+                                    <td>{{ currReservation.RideTypeSelected}} </td>
+                                </tr>
+
+                                <tr>
+                                    <th>Ride Date</th>
+                                    <td>{{currReservation.RideDateSelected}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Ride Time</th>
+                                    <td>{{ currReservation.RideTimeSelected}} </td>
+                                </tr>
+                                <tr>
+                                    <th>Special Needs</th>
+                                    <td>{{ currReservation.SpecialNeeds}} </td>
+                                </tr>
+                                <tr>
+                                    <th>Created Time </th>
+                                    <td>{{ parseIsoDatetime(currReservation.CreatedTimeStamp) }} </td>
+                                </tr>
+                                <tr>
+                                    <th>Last Updated Time </th>
+                                    <td>{{ parseIsoDatetime(currReservation.UpdatedTimeStamp) }} </td>
+                                </tr>
+                                <tr align="right">
+                                    <td colspan=2>
+                                        <button type="button" class="btn btn-primary"  ng-click="editReservation(currReservation)" >Edit Reservation</button>
+
+                                        <button id='activateExistingReservationsTab' type="button" ng-click="activateExistingReservationsTab()" class="btn btn-warning">
+                                            <i class="fa fa-arrow-circle-left"> </i>  Go Back
+                                        </button>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+
+                </div>
+                <!-- View Reservation-->
 
                 <!-- Edit Reservation Tab Begins -->
                 <div role="tabpanel" class="tab-pane" id="editReservation">
@@ -396,7 +457,7 @@
                                         <div class="col-sm-offset-2 col-sm-10 ">
                                             <!-- <button type="submit" class="btn btn-primary" ng-class="{ 'disabled' : (!form.$valid)}">Book Ride</button> -->
                                             <button type="submit" class="btn btn-primary">Update Reservation</button>
-                                            <button type="button" class="btn btn-default" ng-click="bookingReset()">Cancel & Go Back</button>
+                                            <button type="button" class="btn btn-warning" ng-click="cancelEditAndGoBack()">Cancel & Go Back</button>
                                         </div>
                                     </div>
 
@@ -416,8 +477,8 @@
                                         <i class="fa fa-magic"></i> Fix Errors and Update
                                     </button>
 
-                                    <button id='activateNewReservationTabBtn' type="button" ng-click="activateExistingReservationsTab()" class="btn btn-success">
-                                        <i class="fa fa-plus"></i> Go Back
+                                    <button id='activateExistingReservationsTabBtn' type="button" ng-click="activateExistingReservationsTab()" class="btn btn-warning">
+                                         <i class="fa fa-arrow-circle-left"> </i>  Go Back
                                     </button>
 
                                 </div>
