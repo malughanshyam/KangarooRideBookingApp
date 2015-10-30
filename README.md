@@ -1,8 +1,39 @@
 # Crazy Calvin’s Kangaroo Rides 
 ## A web application for making reservations
 
+A web application to help the Calvin, the business owner of 'Crazy Calvin’s Kangaroo Rides' to manage his crazy kangaroo rides. It has been desiged to be responsive and mobile-friendly to accommodate adventure seekers from all devices.
 
-## Installation Steps
+The application includes the following : 
+
+### Registration Page
+Customers can use this page to book a new reservation. After entering the relevant ride information into the form they will see a confirmation screen that will display the information they entered, as well as a confirmation code.   
+
+Front-end validations are performed on the following mandatory fields:
+* First and Last Name
+* Email address
+* Phone Number (with area code)
+* Ride Type
+* Ride Date 
+* Ride Time
+
+Back-end validations include : 
+* Validity of required fields
+* No registration with duplicate Email, First and Last Name
+* No booking beyond the allowed number of reservations per slot
+
+If the submission fails validation, a message (along with the reason) is shown to the customer that their submission has failed so they can correct and resubmit it. 
+
+If the submission is successful, a success message is displayed to the customer with the confirmation code. 
+
+### Admininstration Page
+The administrator can use this page to perform the following tasks: 
+* View the summary of all the reservations at once
+* View, update or cancel an individual reservation.
+* Add new types of rides as the business grows
+* Change the allowed reservations per slot to scale up the business. 
+
+
+## Installation
 Follow the below steps after cloning the repository
 
 ### MongoDB - Setup
@@ -68,3 +99,11 @@ Follow the below steps after cloning the repository
     KangarooRideBookingApp Server App listening on port 8080
     
     ```
+
+
+## Usage
+* New Booking - `HostServerAddress:8080/` or `HostServerAddress:8080/views/home.html`
+* Administrator - `HostServerAddress:8080/views/admin.html`
+* 404 Page (Any broken link will land here) - `HostServerAddress:8080/views/404.html`
+
+If the website is deployed on a desktop/local system - use `localhost` in place of `HostServerAddress`
