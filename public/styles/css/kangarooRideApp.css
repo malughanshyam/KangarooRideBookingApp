@@ -84,7 +84,7 @@ input {
     width: 70px;
 }
 .errorMsg {
-    color: red;
+    color: #FF9900;
 }
 #bookingStatusPlaceholderDiv {
     padding-top: 2em;

@@ -32,6 +32,68 @@ The administrator can use this page to perform the following tasks:
 * Add new types of rides as the business grows
 * Change the allowed reservations per slot to scale up the business. 
 
+## Screenshots
+
+* New Reservation Page | **Mobile Device - Responsive**
+
+  ![Mobile Device - Responsive - Screenshot](readme/screenshots/iPhone6mobileResponsive2.PNG)
+
+  ![Mobile Device - Responsive - Screenshot](readme/screenshots/iPhone6mobileResponsive3.PNG)
+
+* New Reservation Page | **Desktop version**
+
+  ![New Reservation Page - Screenshot](readme/screenshots/newReservationPage.PNG)
+
+* New Reservation Page | **Validations**
+
+  ![Validations - Screenshot](readme/screenshots/validations.PNG)
+
+* New Reservation Page | **Duplicate Reservation Error**
+
+  ![Duplicate Reservation Error - Screenshot](readme/screenshots/duplicateRegError.PNG)
+
+* Admin Page | **Add New Rides**
+
+  ![Add New Rides - Screenshot](readme/screenshots/addRides.PNG)
+
+* Admin Page | **Change Allowed Rides / Slot**
+
+  ![Change allowed rides per slot Page - Screenshot](readme/screenshots/changeAllowedRidesPerSlot.PNG)
+
+* Admin Page | **Reservations Summary**
+
+  * Columns can be sorted by clicking on them. 
+  * Pagination thresohld (reservations displayed per page) is customizable.
+  ![Reservations Summary - Screenshot](readme/screenshots/reservationsSummary.PNG)
+
+* Admin Page | **Search** existing reservations with any of the following
+  * Confirmation Code
+  * Email
+  * First Name or Last Name
+  * Phone Number
+  * Ride Type
+  * Ride Date
+  * Ride Time
+
+  ![Admin Page - Search - Screenshot](readme/screenshots/searchQuery.PNG)
+
+* Admin Page | **View Reservation**
+
+  ![View Reservation - Screenshot](readme/screenshots/viewReservation.PNG)
+
+* Admin Page | **Edit Reservation**
+
+  ![Edit Reservation - Screenshot](readme/screenshots/editReservation.PNG)
+
+* Admin Page | **Delete Reservation**
+
+  ![Delete Reservation - Screenshot](readme/screenshots/deleteReservation.PNG)
+
+* **404 Page**
+
+  ![404 Page - Screenshot](readme/screenshots/404_f.PNG)
+
+
 
 ## Installation
 Follow the below steps after cloning the repository
@@ -102,8 +164,10 @@ Follow the below steps after cloning the repository
 
 
 ## Usage
-* New Booking - `HostServerAddress:8080/` or `HostServerAddress:8080/views/home.html`
-* Administrator - `HostServerAddress:8080/views/admin.html`
-* 404 Page (Any broken link will land here) - `HostServerAddress:8080/views/404.html`
+* [New Booking Page](public/views/home.html) - `HostServerAddress:8080/` or `HostServerAddress:8080/views/home.html`
+* [Administrator Page](public/views/admin.html) - `HostServerAddress:8080/views/admin.html`
+* [404 Page](public/views/404.html) (Any broken link will land here) - `HostServerAddress:8080/views/404.html`
+  ![404 Page - Screenshot](readme/screenshots/404_f.PNG)
 
 If the website is deployed on a desktop/local machine, use `localhost` in place of `HostServerAddress`.
+
