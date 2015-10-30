@@ -32,7 +32,17 @@ The administrator can use this page to perform the following tasks:
 * Add new types of rides as the business grows.
 * Change the allowed reservations per slot to scale up the business. **Sold out time-slots will not be shown in the "Available Slots" options on the New Reservation page**.
 
+## Technologies Used 
+* [MEAN](http://mean.io/#!/) Stack 
+  * [MongoDB](https://www.mongodb.org/) - NoSQL database
+  * [Express](http://expressjs.com/) - Node.js web application framework
+  * [AngularJS](https://angularjs.org/) - open-source front-end web application framework
+  * [Node.js](https://nodejs.org/en/) - open-source, cross-platform runtime environment for developing server-side web applications
+* HTML5
+* [jQuery](https://jquery.com/)
+
 ## Screenshots
+Below are some of the screenshots of the web application
 
 * New Reservation Page | **Mobile Device - Responsive**
 
