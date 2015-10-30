@@ -64,6 +64,7 @@ The administrator can use this page to perform the following tasks:
 
   * Columns can be sorted by clicking on them. 
   * Pagination thresohld (reservations displayed per page) is customizable.
+
   ![Reservations Summary - Screenshot](readme/screenshots/reservationsSummary.PNG)
 
 * Admin Page | **Search** existing reservations with any of the following
@@ -167,7 +168,6 @@ Follow the below steps after cloning the repository
 * [New Booking Page](public/views/home.html) - `HostServerAddress:8080/` or `HostServerAddress:8080/views/home.html`
 * [Administrator Page](public/views/admin.html) - `HostServerAddress:8080/views/admin.html`
 * [404 Page](public/views/404.html) (Any broken link will land here) - `HostServerAddress:8080/views/404.html`
-  ![404 Page - Screenshot](readme/screenshots/404_f.PNG)
 
 If the website is deployed on a desktop/local machine, use `localhost` in place of `HostServerAddress`.
 
