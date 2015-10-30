@@ -201,15 +201,17 @@
                                 <tr>
                                     <th>Confirmation Code</th>
                                     <td> <b>{{newBooking.confirmationCode}} <span id="failedConfCode" ng-show="newBookingStatus == 'FAILED'"> INVALID_REGISTRATION</span> </b></td>
-
-
                                 </tr>
                                 <tr>
                                     <th>Email</th>
-                                    <td> {{ newBooking.firstName}} </td>
+                                    <td> {{ newBooking.email}} </td>
                                 </tr>
                                 <tr>
                                     <th>First Name</th>
+                                    <td> {{ newBooking.firstName}} </td>
+                                </tr>                                
+                                <tr>
+                                    <th>Last Name</th>
                                     <td> {{ newBooking.lastName}} </td>
                                 </tr>
                                 <tr>
