@@ -27,10 +27,10 @@ If the submission is successful, a success message is displayed to the customer 
 
 ### Admininstration Page
 The administrator can use this page to perform the following tasks: 
-* View the summary of all the reservations at once
+* View the summary of all the reservations at once.
 * View, update or cancel an individual reservation.
-* Add new types of rides as the business grows
-* Change the allowed reservations per slot to scale up the business. 
+* Add new types of rides as the business grows.
+* Change the allowed reservations per slot to scale up the business. **Sold out time-slots will not be shown in the "Available Slots" options on the New Reservation page**.
 
 ## Screenshots
 
